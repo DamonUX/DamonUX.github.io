@@ -1,1 +1,149 @@
-Olá mundo do roblox
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DamonUX - Roblox Scripts & Mídia</title>
+    <style>
+        /* Estilização moderna e Dark Mode */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #b3b3b3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #00ff88;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Área do Vídeo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Área do Script (Code Block) */
+        pre {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border-left: 4px solid #00ff88;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8f8f2;
+        }
+
+        /* Botão de Copiar */
+        .btn-copiar {
+            background-color: #00ff88;
+            color: #121212;
+            border: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-copiar:hover {
+            background-color: #00cc6e;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DamonUX Hub</h1>
+        <p>Os melhores scripts e conteúdos de Roblox em um só lugar.</p>
+    </header>
+
+    <!-- SEÇÃO DO VÍDEO -->
+    <div class="container">
+        <h2 class="section-title">Tutorial em Vídeo</h2>
+        <div class="video-container">
+            <!-- SUBSTITUA O ID ABAIXO (dQw4w9WgXcQ) PELO ID DO SEU VÍDEO DO YOUTUBE -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p>Assista ao passo a passo de como ativar e usar o script corretamente.</p>
+    </div>
+
+    <!-- SEÇÃO DO SCRIPT -->
+    <div class="container">
+        <h2 class="section-title">Script Disponível</h2>
+        <p>Clique no botão abaixo para copiar o script e use o seu executor de preferência.</p>
+        
+        <pre><code id="roblox-script">--[[
+    DamonUX Script Oficial
+    Altere este texto pelo seu script de verdade!
+]]
+print("Script injetado com sucesso!")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Exemplo/Script/main/init.lua"))()</code></pre>
+
+        <button class="btn-copiar" onclick="copiarScript()">Copiar Script</button>
+    </div>
+
+    <script>
+        // Função para copiar o script automaticamente
+        function copiarScript() {
+            const codigo = document.getElementById('roblox-script').innerText;
+            navigator.clipboard.writeText(codigo).then(() => {
+                alert('Script copiado para a área de transferência!');
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
