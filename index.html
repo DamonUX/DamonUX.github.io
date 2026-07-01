@@ -25,17 +25,18 @@
             --cor-fundo-elevada: #051005;
             --cor-cartao: rgba(6, 15, 8, 0.75);
             --cor-fundo-codigo: rgba(2, 8, 3, 0.9);
+
             --cor-primaria: #00ff41;
             --cor-primaria-rgb: 0, 255, 65;
             --cor-primaria-dim: #00b82f;
             --cor-primaria-hover: #5dffa0;
             --cor-primaria-glow: rgba(0, 255, 65, 0.7);
+
             --cor-texto-principal: #d6f5dc;
             --cor-texto-secundario: #6b9a75;
             --cor-borda: rgba(0, 255, 65, 0.18);
             --cor-borda-brilho: rgba(0, 255, 65, 0.45);
-            --cor-admin: #ff6b35;
-            --cor-admin-rgb: 255, 107, 53;
+
             --fonte-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
             --borda-arredondada: 8px;
             --transicao-suave: 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -114,6 +115,9 @@
             }
         }
 
+        /* =========================================
+           CABEÇALHO
+        ========================================= */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -150,10 +154,18 @@
             flex-shrink: 0;
             box-shadow: 0 0 6px currentColor;
         }
-        .dot.vermelho { background: #ff5f56; box-shadow: 0 0 8px #ff5f56; }
-        .dot.amarelo { background: #ffbd2e; box-shadow: 0 0 8px #ffbd2e; }
-        .dot.verde { background: #27c93f; box-shadow: 0 0 8px #27c93f; }
-
+        .dot.vermelho {
+            background: #ff5f56;
+            box-shadow: 0 0 8px #ff5f56;
+        }
+        .dot.amarelo {
+            background: #ffbd2e;
+            box-shadow: 0 0 8px #ffbd2e;
+        }
+        .dot.verde {
+            background: #27c93f;
+            box-shadow: 0 0 8px #27c93f;
+        }
         .terminal-path {
             margin-left: 8px;
             white-space: nowrap;
@@ -190,9 +202,16 @@
         }
 
         @keyframes piscar {
-            0%, 100% { opacity: 1; }
-            40% { opacity: 0.15; }
-            60% { opacity: 0.6; }
+            0%,
+            100% {
+                opacity: 1;
+            }
+            40% {
+                opacity: 0.15;
+            }
+            60% {
+                opacity: 0.6;
+            }
         }
 
         .efect-glitch {
@@ -200,13 +219,27 @@
         }
 
         @keyframes glitch {
-            0% { transform: translate(0); }
-            15% { transform: translate(-4px, 3px); }
-            30% { transform: translate(4px, -3px); }
-            45% { transform: translate(-2px, -2px); }
-            60% { transform: translate(3px, 2px); }
-            75% { transform: translate(-1px, 1px); }
-            100% { transform: translate(0); }
+            0% {
+                transform: translate(0);
+            }
+            15% {
+                transform: translate(-4px, 3px);
+            }
+            30% {
+                transform: translate(4px, -3px);
+            }
+            45% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(3px, 2px);
+            }
+            75% {
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                transform: translate(0);
+            }
         }
 
         .subtitulo {
@@ -248,326 +281,20 @@
         }
 
         @keyframes pulsar {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--cor-primaria), 0 0 16px rgba(var(--cor-primaria-rgb), 0.5); }
-            50% { opacity: 0.3; box-shadow: 0 0 4px var(--cor-primaria), 0 0 8px rgba(var(--cor-primaria-rgb), 0.2); }
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--cor-primaria), 0 0 16px rgba(var(--cor-primaria-rgb), 0.5);
+            }
+            50% {
+                opacity: 0.3;
+                box-shadow: 0 0 4px var(--cor-primaria), 0 0 8px rgba(var(--cor-primaria-rgb), 0.2);
+            }
         }
 
-        .admin-toggle-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 999;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--cor-admin);
-            color: var(--cor-admin);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.4rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transicao-suave);
-            box-shadow:
-                0 0 12px rgba(var(--cor-admin-rgb), 0.3),
-                0 0 30px rgba(var(--cor-admin-rgb), 0.1);
-            font-family: var(--fonte-mono);
-        }
-
-        .admin-toggle-btn:hover {
-            background: rgba(var(--cor-admin-rgb), 0.15);
-            box-shadow:
-                0 0 20px rgba(var(--cor-admin-rgb), 0.5),
-                0 0 40px rgba(var(--cor-admin-rgb), 0.2);
-            transform: scale(1.08);
-        }
-
-        .admin-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0.35s;
-        }
-
-        .admin-overlay.ativo {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .admin-panel {
-            background: rgba(8, 18, 10, 0.92);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--cor-admin);
-            border-radius: 12px;
-            max-width: 700px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 30px;
-            position: relative;
-            box-shadow:
-                0 0 30px rgba(var(--cor-admin-rgb), 0.3),
-                0 0 60px rgba(var(--cor-admin-rgb), 0.1),
-                0 20px 50px rgba(0, 0, 0, 0.7);
-            transform: translateY(30px);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .admin-overlay.ativo .admin-panel {
-            transform: translateY(0);
-        }
-
-        .admin-panel h2 {
-            color: var(--cor-admin);
-            text-shadow:
-                0 0 8px rgba(var(--cor-admin-rgb), 0.7),
-                0 0 20px rgba(var(--cor-admin-rgb), 0.3);
-            margin: 0 0 8px 0;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .admin-panel .admin-subtitle {
-            color: var(--cor-texto-secundario);
-            font-size: 0.8rem;
-            margin-bottom: 24px;
-        }
-
-        .admin-close {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: var(--cor-texto-secundario);
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: all 0.25s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .admin-close:hover {
-            color: var(--cor-admin);
-            text-shadow: 0 0 16px rgba(var(--cor-admin-rgb), 0.7);
-            background: rgba(var(--cor-admin-rgb), 0.08);
-        }
-
-        .admin-login {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .admin-login input {
-            width: 100%;
-            max-width: 300px;
-            background: rgba(3, 9, 4, 0.8);
-            border: 1px solid var(--cor-borda);
-            border-left: 3px solid var(--cor-admin);
-            color: var(--cor-texto-principal);
-            font-family: var(--fonte-mono);
-            font-size: 0.9rem;
-            padding: 12px 16px;
-            border-radius: 5px;
-            outline: none;
-            transition: all var(--transicao-suave);
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .admin-login input:focus {
-            border-color: var(--cor-admin);
-            box-shadow: 0 0 18px rgba(var(--cor-admin-rgb), 0.3);
-        }
-
-        .admin-login button {
-            background: rgba(var(--cor-admin-rgb), 0.1);
-            border: 1px solid var(--cor-admin);
-            color: var(--cor-admin);
-            font-family: var(--fonte-mono);
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: all var(--transicao-suave);
-            font-size: 0.85rem;
-        }
-
-        .admin-login button:hover {
-            background: rgba(var(--cor-admin-rgb), 0.25);
-            box-shadow: 0 0 24px rgba(var(--cor-admin-rgb), 0.4);
-        }
-
-        .admin-login .erro-senha {
-            color: #ff5f56;
-            font-size: 0.8rem;
-            text-shadow: 0 0 8px rgba(255, 95, 86, 0.5);
-            min-height: 20px;
-        }
-
-        .admin-content {
-            display: none;
-        }
-
-        .admin-content.visivel {
-            display: block;
-        }
-
-        .admin-form {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-
-        .admin-form label {
-            color: var(--cor-texto-secundario);
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: -8px;
-        }
-
-        .admin-form input,
-        .admin-form textarea {
-            width: 100%;
-            background: rgba(3, 9, 4, 0.7);
-            border: 1px solid var(--cor-borda);
-            border-left: 3px solid var(--cor-admin);
-            color: var(--cor-texto-principal);
-            font-family: var(--fonte-mono);
-            font-size: 0.85rem;
-            padding: 11px 14px;
-            border-radius: 5px;
-            outline: none;
-            transition: all var(--transicao-suave);
-            resize: vertical;
-        }
-
-        .admin-form input:focus,
-        .admin-form textarea:focus {
-            border-color: var(--cor-admin);
-            box-shadow: 0 0 14px rgba(var(--cor-admin-rgb), 0.25);
-        }
-
-        .admin-form textarea {
-            min-height: 80px;
-        }
-
-        .admin-form .btn-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn-admin {
-            background: rgba(var(--cor-admin-rgb), 0.1);
-            border: 1px solid var(--cor-admin);
-            color: var(--cor-admin);
-            font-family: var(--fonte-mono);
-            padding: 11px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: all var(--transicao-suave);
-            font-size: 0.8rem;
-            flex: 1;
-            text-transform: uppercase;
-        }
-
-        .btn-admin:hover {
-            background: rgba(var(--cor-admin-rgb), 0.25);
-            box-shadow: 0 0 20px rgba(var(--cor-admin-rgb), 0.35);
-            transform: translateY(-1px);
-        }
-
-        .btn-admin.excluir {
-            border-color: #ff5f56;
-            color: #ff5f56;
-            background: rgba(255, 95, 86, 0.08);
-            flex: 0.4;
-        }
-
-        .btn-admin.excluir:hover {
-            background: rgba(255, 95, 86, 0.2);
-            box-shadow: 0 0 20px rgba(255, 95, 86, 0.4);
-        }
-
-        .btn-admin.sair {
-            border-color: var(--cor-texto-secundario);
-            color: var(--cor-texto-secundario);
-            background: transparent;
-            flex: 0.4;
-            margin-top: 8px;
-        }
-
-        .admin-scripts-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 8px;
-            max-height: 250px;
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-
-        .admin-script-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(3, 9, 4, 0.5);
-            border: 1px solid var(--cor-borda);
-            padding: 10px 14px;
-            border-radius: 5px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .admin-script-item span {
-            color: var(--cor-texto-principal);
-            font-size: 0.8rem;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .admin-script-item .btn-admin {
-            padding: 7px 12px;
-            font-size: 0.7rem;
-            flex: 0 0 auto;
-        }
-
-        .mensagem-admin {
-            color: var(--cor-primaria);
-            font-size: 0.8rem;
-            text-shadow: 0 0 8px rgba(var(--cor-primaria-rgb), 0.5);
-            min-height: 22px;
-            text-align: center;
-        }
-
+        /* =========================================
+           CONTEÚDO PRINCIPAL
+        ========================================= */
         main {
             width: 100%;
             display: flex;
@@ -653,6 +380,9 @@
             margin: -10px 0 20px 0;
         }
 
+        /* =========================================
+           SEÇÃO DE BOAS-VINDAS
+        ========================================= */
         .welcome-box {
             background: rgba(3, 10, 5, 0.7);
             backdrop-filter: blur(6px);
@@ -697,6 +427,9 @@
             border: none;
         }
 
+        /* =========================================
+           CAMPO DE BUSCA TERMINAL
+        ========================================= */
         .search-container {
             margin-bottom: 22px;
         }
@@ -734,6 +467,9 @@
                 inset 0 0 16px rgba(var(--cor-primaria-rgb), 0.04);
         }
 
+        /* =========================================
+           LISTA DE SCRIPTS
+        ========================================= */
         .scripts-list {
             display: flex;
             flex-direction: column;
@@ -817,10 +553,11 @@
             line-height: 1.55;
         }
 
+        /* Detalhes expansíveis */
         .script-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s, opacity 0.35s;
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
             margin-top: 0;
             opacity: 0;
             background: rgba(0, 0, 0, 0.4);
@@ -881,6 +618,9 @@
             font-weight: 700;
         }
 
+        /* =========================================
+           BOTÕES PRINCIPAIS
+        ========================================= */
         .acoes-botoes {
             display: flex;
             gap: 12px;
@@ -931,15 +671,54 @@
             background-color: rgba(var(--cor-primaria-rgb), 0.12);
             box-shadow:
                 0 0 20px rgba(var(--cor-primaria-rgb), 0.35),
-                0 0 40px rgba(var(--cor-primaria-rgb), 0.1);
+                0 0 40px rgba(var(--cor-primaria-rgb), 0.1),
+                0 0 60px rgba(var(--cor-primaria-rgb), 0.04);
             transform: translateY(-2px);
         }
 
         .btn-obter:active,
         .btn-detalhes:active {
             transform: scale(0.96);
+            transition: transform 0.1s ease;
         }
 
+        .btn-obter:focus-visible,
+        .btn-detalhes:focus-visible {
+            outline: 2px solid var(--cor-primaria);
+            outline-offset: 3px;
+            box-shadow: 0 0 24px rgba(var(--cor-primaria-rgb), 0.5);
+        }
+
+        .btn-obter.loading,
+        .btn-detalhes.loading {
+            opacity: 0.7;
+            cursor: progress;
+            pointer-events: none;
+        }
+
+        .btn-obter:disabled,
+        .btn-detalhes:disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(var(--cor-primaria-rgb), 0.2);
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: girar 0.55s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes girar {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Ripple */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -950,9 +729,15 @@
         }
 
         @keyframes ripple-effect {
-            to { transform: scale(4.5); opacity: 0; }
+            to {
+                transform: scale(4.5);
+                opacity: 0;
+            }
         }
 
+        /* =========================================
+           MODAL
+        ========================================= */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -966,7 +751,7 @@
             padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.35s, visibility 0.35s;
+            transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
 
         .modal-overlay.ativo {
@@ -984,7 +769,11 @@
             width: 100%;
             padding: 28px;
             position: relative;
-            box-shadow: 0 0 30px rgba(var(--cor-primaria-rgb), 0.25), 0 20px 50px rgba(0,0,0,0.7);
+            box-shadow:
+                0 0 30px rgba(var(--cor-primaria-rgb), 0.25),
+                0 0 60px rgba(var(--cor-primaria-rgb), 0.1),
+                0 0 100px rgba(var(--cor-primaria-rgb), 0.04),
+                0 20px 50px rgba(0, 0, 0, 0.7);
             transform: translateY(30px);
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -1002,6 +791,7 @@
             color: var(--cor-texto-secundario);
             font-size: 1.6rem;
             cursor: pointer;
+            transition: all 0.25s ease;
             width: 36px;
             height: 36px;
             display: flex;
@@ -1013,6 +803,7 @@
         .modal-close:hover {
             color: var(--cor-primaria);
             text-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), 0.7);
+            background: rgba(var(--cor-primaria-rgb), 0.08);
         }
 
         .modal-thumbnail {
@@ -1023,6 +814,7 @@
             border: 1px solid var(--cor-borda);
             margin-bottom: 18px;
             background: var(--cor-fundo-codigo);
+            box-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), 0.1);
         }
 
         .modal-thumbnail.placeholder {
@@ -1031,9 +823,11 @@
             justify-content: center;
             background: rgba(3, 9, 4, 0.8);
             color: var(--cor-texto-secundario);
+            font-family: var(--fonte-mono);
             font-size: 0.8rem;
             border: 1px dashed var(--cor-borda);
             text-align: center;
+            line-height: 1.6;
         }
 
         .modal-title {
@@ -1048,6 +842,7 @@
             color: var(--cor-texto-secundario);
             font-size: 0.9rem;
             margin: 0 0 22px;
+            line-height: 1.6;
         }
 
         .btn-modal-prosseguir {
@@ -1069,21 +864,36 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all var(--transicao-suave);
+            box-shadow:
+                0 0 10px rgba(var(--cor-primaria-rgb), 0.12),
+                0 0 24px rgba(var(--cor-primaria-rgb), 0.04);
         }
 
         .btn-modal-prosseguir:hover {
             background-color: rgba(var(--cor-primaria-rgb), 0.16);
-            box-shadow: 0 0 24px rgba(var(--cor-primaria-rgb), 0.4);
+            box-shadow:
+                0 0 24px rgba(var(--cor-primaria-rgb), 0.4),
+                0 0 50px rgba(var(--cor-primaria-rgb), 0.12);
             transform: translateY(-2px);
             color: #fff;
         }
 
+        .btn-modal-prosseguir:active {
+            transform: scale(0.96);
+        }
+
+        /* =========================================
+           FAQ
+        ========================================= */
         .faq-item {
             border-bottom: 1px solid var(--cor-borda);
             padding: 16px 0;
+            transition: all var(--transicao-suave);
         }
 
-        .faq-item:last-child { border-bottom: none; }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
 
         .faq-question {
             font-weight: 700;
@@ -1095,7 +905,9 @@
             margin: 0;
             font-size: 0.95rem;
             text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.3);
+            transition: all var(--transicao-suave);
             padding: 4px 0;
+            border-radius: 4px;
             user-select: none;
         }
 
@@ -1107,10 +919,11 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s;
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s cubic-bezier(0.33, 1, 0.68, 1);
             color: var(--cor-texto-secundario);
             font-size: 0.88rem;
             margin-top: 0;
+            line-height: 1.65;
         }
 
         .faq-item.ativa .faq-answer {
@@ -1132,6 +945,9 @@
             text-shadow: 0 0 10px rgba(var(--cor-primaria-rgb), 0.6);
         }
 
+        /* =========================================
+           RODAPÉ
+        ========================================= */
         footer {
             color: var(--cor-texto-secundario);
             font-size: 0.76rem;
@@ -1152,91 +968,89 @@
             text-shadow: 0 0 12px rgba(var(--cor-primaria-rgb), 0.6);
         }
 
+        /* =========================================
+           RESPONSIVIDADE
+        ========================================= */
         @media (max-width: 639px) {
-            body { padding: 24px 10px 50px; }
-            .card { padding: 18px; border-radius: 6px; }
-            .card::before, .card::after { width: 12px; height: 12px; }
-            .section-title { font-size: 1rem; }
-            .script-item { padding: 14px; }
-            .btn-obter, .btn-detalhes { padding: 12px 16px; font-size: 0.72rem; min-height: 44px; }
-            .modal { padding: 20px; }
-            .modal-thumbnail { height: 150px; }
-            h1.titulo { font-size: 1.8rem; }
-            .admin-panel { padding: 20px; max-height: 90vh; }
-            .admin-toggle-btn { bottom: 16px; right: 16px; width: 44px; height: 44px; }
+            body {
+                padding: 24px 10px 50px;
+            }
+            .card {
+                padding: 18px;
+                border-radius: 6px;
+            }
+            .card::before,
+            .card::after {
+                width: 12px;
+                height: 12px;
+            }
+            .section-title {
+                font-size: 1rem;
+            }
+            .script-item {
+                padding: 14px;
+            }
+            .btn-obter,
+            .btn-detalhes {
+                padding: 12px 16px;
+                font-size: 0.72rem;
+                min-height: 44px;
+            }
+            .modal {
+                padding: 20px;
+            }
+            .modal-thumbnail {
+                height: 150px;
+            }
+            h1.titulo {
+                font-size: 1.8rem;
+            }
         }
 
         @media (min-width: 640px) {
-            body { padding: 48px 24px 80px; }
-            .card { padding: 32px; }
-            .section-title { font-size: 1.25rem; }
-            .acoes-botoes { flex-wrap: nowrap; }
+            body {
+                padding: 48px 24px 80px;
+            }
+            .card {
+                padding: 32px;
+            }
+            .section-title {
+                font-size: 1.25rem;
+            }
+            .acoes-botoes {
+                flex-wrap: nowrap;
+            }
         }
 
+        /* Animação de entrada dos cards */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card {
             animation: fadeInUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
         }
-        .card:nth-child(2) { animation-delay: 0.12s; }
-        .card:nth-child(3) { animation-delay: 0.24s; }
+        .card:nth-child(2) {
+            animation-delay: 0.12s;
+        }
+        .card:nth-child(3) {
+            animation-delay: 0.24s;
+        }
     </style>
 </head>
 <body>
+
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
     <div class="scanlines" aria-hidden="true"></div>
 
-    <button class="admin-toggle-btn" id="admin-toggle-btn" title="Painel Admin" aria-label="Abrir painel de administração">⚙️</button>
-
-    <!-- PAINEL ADMIN -->
-    <div class="admin-overlay" id="admin-overlay" aria-hidden="true">
-        <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-titulo">
-            <button class="admin-close" id="admin-close" aria-label="Fechar painel admin">&times;</button>
-            <h2 id="admin-titulo">⚙️ PAINEL ADMIN</h2>
-            <p class="admin-subtitle">Gerencie scripts, links e capas do site (Firebase Auth)</p>
-
-            <div class="admin-login" id="admin-login">
-                <input type="email" id="admin-email-input" placeholder="SEU E-MAIL" autocomplete="email">
-                <input type="password" id="admin-senha-input" placeholder="SUA SENHA" autocomplete="current-password">
-                <button id="admin-login-btn">ENTRAR</button>
-                <p class="erro-senha" id="admin-erro-senha"></p>
-            </div>
-
-            <div class="admin-content" id="admin-content">
-                <p class="mensagem-admin" id="admin-mensagem"></p>
-                <div class="admin-form" id="admin-form">
-                    <input type="hidden" id="admin-edit-id" value="">
-                    <label for="admin-titulo-input">TÍTULO DO SCRIPT</label>
-                    <input type="text" id="admin-titulo-input" placeholder="Ex: Natural Disaster Hub" required>
-                    <label for="admin-desc-input">DESCRIÇÃO</label>
-                    <input type="text" id="admin-desc-input" placeholder="Ex: Auto win, teleport...">
-                    <label for="admin-link-input">LINK ENCURTADO</label>
-                    <input type="url" id="admin-link-input" placeholder="https://direct-link.net/..." required>
-                    <label for="admin-codigo-input">CÓDIGO DO SCRIPT</label>
-                    <textarea id="admin-codigo-input" placeholder="loadstring(game:HttpGet('...'))()"></textarea>
-                    <label for="admin-thumb-input">URL DA CAPA (opcional)</label>
-                    <input type="url" id="admin-thumb-input" placeholder="https://raw.githubusercontent.com/...">
-                    <label for="admin-badge-input">BADGE (opcional)</label>
-                    <input type="text" id="admin-badge-input" placeholder="POPULAR, NOVO, MOBILE...">
-                    <label for="admin-modal-desc-input">DESCRIÇÃO DO MODAL</label>
-                    <input type="text" id="admin-modal-desc-input" placeholder="Texto ao clicar em Obter">
-                    <div class="btn-row">
-                        <button class="btn-admin" id="admin-salvar-btn">💾 SALVAR / ADICIONAR</button>
-                        <button class="btn-admin excluir" id="admin-excluir-btn" style="display:none;">🗑️ EXCLUIR</button>
-                    </div>
-                    <button class="btn-admin" id="admin-cancelar-btn" style="display:none;">↩️ CANCELAR EDIÇÃO</button>
-                </div>
-                <h3 style="color:var(--cor-admin); margin-top:24px; font-size:1rem;">📋 SCRIPTS CADASTRADOS</h3>
-                <div class="admin-scripts-list" id="admin-scripts-list"></div>
-                <button class="btn-admin sair" id="admin-sair-btn">🚪 SAIR DO PAINEL</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DE OBTER SCRIPT -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
             <button class="modal-close" id="modal-close" aria-label="Fechar modal">&times;</button>
@@ -1256,8 +1070,10 @@
             <span class="dot verde"></span>
             <span class="terminal-path">root@damonux:~$</span>
         </div>
+
         <h1 class="titulo" id="titulo-principal"></h1>
         <p class="subtitulo">Os melhores scripts e conteúdos de Roblox em um só lugar.</p>
+
         <div class="status-bar">
             <span><span class="status-dot" aria-hidden="true"></span>ONLINE</span>
             <span id="uptime">UPTIME --</span>
@@ -1267,45 +1083,72 @@
     </header>
 
     <main>
+        <!-- SEÇÃO DE BOAS-VINDAS -->
         <section class="card">
             <h2 class="section-title"><span>//</span> Bem-vindo(a) ao DamonUX</h2>
             <div class="welcome-box">
                 <p>👋 <strong class="typing-effect" id="welcome-typing"></strong></p>
                 <p>Este é o seu hub definitivo de <span style="color: var(--cor-primaria); text-shadow: 0 0 8px rgba(var(--cor-primaria-rgb), 0.5);">scripts para Roblox</span>. Navegue pela nossa coleção, escolha o script desejado e clique em <strong>"OBTER SCRIPT"</strong> para acessá-lo via encurtador seguro.</p>
                 <div class="video-container" style="margin-top: 16px;">
-                    <iframe src="https://www.youtube.com/embed/D0cRl8HdsjY" title="Tutorial em vídeo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    <iframe src="https://www.youtube.com/embed/D0cRl8HdsjY" title="Tutorial em vídeo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy">
+                    </iframe>
                 </div>
                 <p style="font-size: 0.8rem; margin-top: 10px;">⚡ Use scripts com responsabilidade. Estamos sempre atualizando!</p>
             </div>
         </section>
 
+        <!-- SEÇÃO DOS SCRIPTS -->
         <section class="card">
             <h2 class="section-title"><span>//</span> Scripts Disponíveis</h2>
             <p class="section-desc">Use o campo abaixo para filtrar, toque em "Obter Script" para ver a capa e acessar o link ou expanda para ver o código.</p>
+
             <div class="search-container">
                 <input type="text" class="search-input" id="busca-scripts" placeholder="> filtrar scripts..." autocomplete="off" aria-label="Buscar scripts">
             </div>
-            <div id="scripts-list" class="scripts-list" aria-live="polite"></div>
+
+            <div id="scripts-list" class="scripts-list" aria-live="polite">
+            </div>
         </section>
 
+        <!-- FAQ -->
         <section class="card" id="faq">
             <h2 class="section-title"><span>//</span> Perguntas Frequentes (FAQ)</h2>
             <div class="faq-list">
                 <div class="faq-item">
-                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">🔗 Por que o link é encurtado? Isso ajuda o site? <span class="faq-toggle">+</span></h3>
-                    <div class="faq-answer"><p>Sim! O uso de <strong>encurtadores de link</strong> é a principal forma de manter o site <strong>vivo e gratuito</strong>. Cada acesso gera uma pequena receita que cobre custos de hospedagem e desenvolvimento. <span style="color: var(--cor-primaria);">Sem encurtador, infelizmente o site não sobreviveria.</span></p></div>
+                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">
+                        🔗 Por que o link é encurtado? Isso ajuda o site?
+                        <span class="faq-toggle">+</span>
+                    </h3>
+                    <div class="faq-answer">
+                        <p>Sim! O uso de <strong>encurtadores de link</strong> é a principal forma de manter o site <strong>vivo e gratuito</strong>. Cada acesso gera uma pequena receita que cobre custos de hospedagem e desenvolvimento. Diferente de outras plataformas cheias de anúncios invasivos que prejudicam sua experiência, nosso método é rápido, seguro e direto. Você espera alguns segundos e já está no destino. <span style="color: var(--cor-primaria); text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.5);">Sem encurtador, infelizmente o site não sobreviveria.</span></p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">🛡️ Os scripts são seguros? <span class="faq-toggle">+</span></h3>
-                    <div class="faq-answer"><p>Todos os scripts são verificados regularmente. Porém, use em uma conta alternativa e por sua conta e risco.</p></div>
+                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">
+                        🛡️ Os scripts são seguros?
+                        <span class="faq-toggle">+</span>
+                    </h3>
+                    <div class="faq-answer">
+                        <p>Todos os scripts são verificados regularmente. Porém, use em uma conta alternativa e por sua conta e risco. Recomendamos sempre testar antes em jogos pouco importantes.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">📱 Funciona no mobile? <span class="faq-toggle">+</span></h3>
-                    <div class="faq-answer"><p>Sim! Muitos dos nossos scripts têm versões otimizadas para celular. Procure pelos com badge "MOBILE".</p></div>
+                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">
+                        📱 Funciona no mobile?
+                        <span class="faq-toggle">+</span>
+                    </h3>
+                    <div class="faq-answer">
+                        <p>Sim! Muitos dos nossos scripts têm versões otimizadas para celular. Procure pelos com badge "MOBILE" ou descrição indicando compatibilidade. Usamos encurtadores que funcionam perfeitamente em qualquer dispositivo.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">❓ Como posso contribuir ou relatar bugs? <span class="faq-toggle">+</span></h3>
-                    <div class="faq-answer"><p>Fique à vontade para abrir uma issue no nosso <a href="https://github.com/DamonUX/DamonUX" style="color: var(--cor-primaria);">repositório GitHub</a>.</p></div>
+                    <h3 class="faq-question" tabindex="0" role="button" aria-expanded="false">
+                        ❓ Como posso contribuir ou relatar bugs?
+                        <span class="faq-toggle">+</span>
+                    </h3>
+                    <div class="faq-answer">
+                        <p>Fique à vontade para abrir uma issue no nosso <a href="https://github.com/DamonUX/DamonUX" style="color: var(--cor-primaria); text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.5);">repositório GitHub</a>. Feedbacks são sempre bem-vindos!</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1316,464 +1159,551 @@
         <p><a href="#faq" style="color: var(--cor-primaria-dim); text-decoration: none;">FAQ</a> | <a href="#" style="color: var(--cor-primaria-dim); text-decoration: none;">Voltar ao topo</a></p>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    <script>
+        (function() {
+            // =========================================
+            // BANCO DE DADOS DOS SCRIPTS
+            // =========================================
+            const SCRIPTS_DB = [{
+                id: 1,
+                title: "Natural diaster Hub",
+                description: "Auto win, teleport, free gamepass, black hole and more!",
+                badge: "POPULAR",
+                link_encurtado: "https://direct-link.net/1374918/G1iIjqHImdg0",
+                codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo1"))()',
+                thumbnail: "https://raw.githubusercontent.com/DamonUX/DamonUX.github.io/refs/heads/main/capas%20de%20scripts/IMG_0569.jpeg",
+                modal_description: "Este script funciona em mais de 90% dos jogos do Roblox. Perfeito para iniciantes e veteranos."
+            }, {
+                id: 2,
+                title: "Survive the killer (keyless)",
+                description: "Auto-farm, Universal ESP, Kill-All Auto-escape and more!",
+                badge: "NOVO",
+                link_encurtado: "https://direct-link.net/1374918/PgnWzjuPC16E",
+                codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo2"))()',
+                thumbnail: "https://raw.githubusercontent.com/DamonUX/DamonUX.github.io/refs/heads/main/capas%20de%20scripts/IMG_0585.jpeg",
+                modal_description: "Proteção avançada com ofuscação de código. Ideal para quem busca segurança máxima."
+            }, {
+                id: 3,
+                title: "Script Lite (Mobile)",
+                description: "Versão leve, otimizada para jogar pelo celular sem lag.",
+                badge: null,
+                link_encurtado: "https://linkvertise.com/123456/script-lite",
+                codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo3"))()',
+                thumbnail: "",
+                modal_description: "Desenvolvido especialmente para dispositivos móveis. Baixo consumo de memória e bateria."
+            }, {
+                id: 4,
+                title: "Auto Farm & Collect",
+                description: "Automatiza coleta de recursos e farm de XP em diversos modos.",
+                badge: "ÚTIL",
+                link_encurtado: "https://linkvertise.com/123456/auto-farm",
+                codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo4"))()',
+                thumbnail: "",
+                modal_description: "Deixe o script trabalhar por você! Acumule recursos e experiência de forma automática."
+            }, {
+                id: 5,
+                title: "ESP & Wallhack Pack",
+                description: "Visualização aprimorada com destaques de jogadores e itens.",
+                badge: null,
+                link_encurtado: "https://linkvertise.com/123456/esp-pack",
+                codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo5"))()',
+                thumbnail: "",
+                modal_description: "Veja através das paredes! Destaque inimigos, aliados e itens valiosos no mapa."
+            }];
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCzQ4NbDYixK7eV9_Ss6_f-BrDolJvrP-4",
-            authDomain: "damonux.firebaseapp.com",
-            projectId: "damonux",
-            storageBucket: "damonux.firebasestorage.app",
-            messagingSenderId: "398509543259",
-            appId: "1:398509543259:web:31f749fd8072430be4547e",
-            measurementId: "G-WQFX3CB7KQ"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const scriptsCollection = collection(db, "scripts");
-
-        // Dados iniciais
-        const SCRIPTS_DB_INICIAL = [
-            { id: 1, title: "Natural diaster Hub", description: "Auto win, teleport, free gamepass, black hole and more!", badge: "POPULAR", link_encurtado: "https://direct-link.net/1374918/G1iIjqHImdg0", codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo1"))()', thumbnail: "https://raw.githubusercontent.com/DamonUX/DamonUX.github.io/refs/heads/main/capas%20de%20scripts/IMG_0569.jpeg", modal_description: "Este script funciona em mais de 90% dos jogos do Roblox. Perfeito para iniciantes e veteranos." },
-            { id: 2, title: "Survive the killer (keyless)", description: "Auto-farm, Universal ESP, Kill-All Auto-escape and more!", badge: "NOVO", link_encurtado: "https://direct-link.net/1374918/PgnWzjuPC16E", codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo2"))()', thumbnail: "https://raw.githubusercontent.com/DamonUX/DamonUX.github.io/refs/heads/main/capas%20de%20scripts/IMG_0585.jpeg", modal_description: "Proteção avançada com ofuscação de código. Ideal para quem busca segurança máxima." },
-            { id: 3, title: "Script Lite (Mobile)", description: "Versão leve, otimizada para jogar pelo celular sem lag.", badge: null, link_encurtado: "https://linkvertise.com/123456/script-lite", codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo3"))()', thumbnail: "", modal_description: "Desenvolvido especialmente para dispositivos móveis. Baixo consumo de memória e bateria." },
-            { id: 4, title: "Auto Farm & Collect", description: "Automatiza coleta de recursos e farm de XP em diversos modos.", badge: "ÚTIL", link_encurtado: "https://linkvertise.com/123456/auto-farm", codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo4"))()', thumbnail: "", modal_description: "Deixe o script trabalhar por você! Acumule recursos e experiência de forma automática." },
-            { id: 5, title: "ESP & Wallhack Pack", description: "Visualização aprimorada com destaques de jogadores e itens.", badge: null, link_encurtado: "https://linkvertise.com/123456/esp-pack", codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo5"))()', thumbnail: "", modal_description: "Veja através das paredes! Destaque inimigos, aliados e itens valiosos no mapa." }
-        ];
-
-        let SCRIPTS_DB = [];
-
-        async function carregarScriptsDoFirestore() {
-            try {
-                const q = query(scriptsCollection, orderBy("id", "asc"));
-                const snapshot = await getDocs(q);
-                if (snapshot.empty) {
-                    for (const script of SCRIPTS_DB_INICIAL) {
-                        await addDoc(scriptsCollection, script);
-                    }
-                    const newSnapshot = await getDocs(q);
-                    SCRIPTS_DB = newSnapshot.docs.map(doc => ({ firestoreId: doc.id, ...doc.data() }));
-                } else {
-                    SCRIPTS_DB = snapshot.docs.map(doc => ({ firestoreId: doc.id, ...doc.data() }));
-                }
-            } catch (error) {
-                console.error("Erro ao carregar scripts:", error);
-                const dados = localStorage.getItem('damonux_scripts_db');
-                SCRIPTS_DB = dados ? JSON.parse(dados) : JSON.parse(JSON.stringify(SCRIPTS_DB_INICIAL));
-            }
-            renderizarScripts();
-        }
-
-        async function adicionarScript(script) {
-            try {
-                const docRef = await addDoc(scriptsCollection, script);
-                script.firestoreId = docRef.id;
-                return true;
-            } catch (e) { return false; }
-        }
-
-        async function atualizarScript(script) {
-            if (!script.firestoreId) return false;
-            try {
-                const { firestoreId, ...dados } = script;
-                await updateDoc(doc(db, "scripts", firestoreId), dados);
-                return true;
-            } catch (e) { return false; }
-        }
-
-        async function deletarScript(script) {
-            if (!script.firestoreId) return false;
-            try {
-                await deleteDoc(doc(db, "scripts", script.firestoreId));
-                return true;
-            } catch (e) { return false; }
-        }
-
-        function gerarNovoId() {
-            return SCRIPTS_DB.length ? Math.max(...SCRIPTS_DB.map(s => s.id)) + 1 : 1;
-        }
-
-        // DOM Elements
-        const containerScripts = document.getElementById('scripts-list');
-        const contadorElemento = document.getElementById('contador-scripts');
-        const buscaInput = document.getElementById('busca-scripts');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalThumbnail = document.getElementById('modal-thumbnail');
-        const modalTitulo = document.getElementById('modal-titulo');
-        const modalDesc = document.getElementById('modal-desc');
-        const modalProsseguir = document.getElementById('modal-prosseguir');
-        const modalClose = document.getElementById('modal-close');
-        const adminToggleBtn = document.getElementById('admin-toggle-btn');
-        const adminOverlay = document.getElementById('admin-overlay');
-        const adminClose = document.getElementById('admin-close');
-        const adminLoginDiv = document.getElementById('admin-login');
-        const adminContentDiv = document.getElementById('admin-content');
-        const adminEmailInput = document.getElementById('admin-email-input');
-        const adminSenhaInput = document.getElementById('admin-senha-input');
-        const adminLoginBtn = document.getElementById('admin-login-btn');
-        const adminErroSenha = document.getElementById('admin-erro-senha');
-        const adminMensagem = document.getElementById('admin-mensagem');
-        const adminEditId = document.getElementById('admin-edit-id');
-        const adminTituloInput = document.getElementById('admin-titulo-input');
-        const adminDescInput = document.getElementById('admin-desc-input');
-        const adminLinkInput = document.getElementById('admin-link-input');
-        const adminCodigoInput = document.getElementById('admin-codigo-input');
-        const adminThumbInput = document.getElementById('admin-thumb-input');
-        const adminBadgeInput = document.getElementById('admin-badge-input');
-        const adminModalDescInput = document.getElementById('admin-modal-desc-input');
-        const adminSalvarBtn = document.getElementById('admin-salvar-btn');
-        const adminExcluirBtn = document.getElementById('admin-excluir-btn');
-        const adminCancelarBtn = document.getElementById('admin-cancelar-btn');
-        const adminSairBtn = document.getElementById('admin-sair-btn');
-        const adminScriptsList = document.getElementById('admin-scripts-list');
-
-        let linkAtual = '';
-
-        // Partículas
-        const canvas = document.getElementById('particle-canvas');
-        if (canvas) {
+            // =========================================
+            // PARTÍCULAS CANVAS OTIMIZADAS
+            // =========================================
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            let particulas = [], animacaoId = null, pausado = false;
-            const TOTAL = 45, FRAME = 1000/60;
-            let ultimo = 0;
-            function redim() {
-                const dpr = Math.min(devicePixelRatio||1,2);
-                canvas.width = innerWidth*dpr; canvas.height = innerHeight*dpr;
-                canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
-                ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
+            let particulas = [];
+            let animacaoId = null;
+            let pausado = false;
+            const TOTAL_PARTICULAS = 45;
+            let ultimoTimestamp = 0;
+            const FRAME_ALVO = 1000 / 60; // ~16.67ms para 60fps
+
+            function redimensionarCanvas() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = window.innerWidth * dpr;
+                canvas.height = window.innerHeight * dpr;
+                canvas.style.width = window.innerWidth + 'px';
+                canvas.style.height = window.innerHeight + 'px';
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.scale(dpr, dpr);
             }
-            window.addEventListener('resize', ()=>{ redim(); criar(); });
-            redim();
-            function criar() {
+            window.addEventListener('resize', function() {
+                redimensionarCanvas();
+                criarParticulas();
+            });
+            redimensionarCanvas();
+
+            function criarParticulas() {
                 particulas = [];
-                for(let i=0;i<TOTAL;i++) particulas.push({
-                    x: Math.random()*innerWidth, y: Math.random()*innerHeight,
-                    vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-                    tam: Math.random()*2.4+0.7, brilho: Math.random()*0.16+0.06,
-                    varBrilho: Math.random()*0.04, fase: Math.random()*Math.PI*2
-                });
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                for (let i = 0; i < TOTAL_PARTICULAS; i++) {
+                    particulas.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        tamanho: Math.random() * 2.4 + 0.7,
+                        brilho: Math.random() * 0.16 + 0.06,
+                        variacaoBrilho: Math.random() * 0.04,
+                        fase: Math.random() * Math.PI * 2
+                    });
+                }
             }
-            criar();
-            function desenhar(t) {
-                if(pausado){ requestAnimationFrame(desenhar); return; }
-                if(t-ultimo < FRAME){ requestAnimationFrame(desenhar); return; }
-                ultimo = t;
-                ctx.clearRect(0,0,innerWidth,innerHeight);
-                const tempo = t*0.001;
-                for(const p of particulas){
-                    p.x += p.vx; p.y += p.vy;
-                    if(p.x<-15)p.x=innerWidth+15; if(p.x>innerWidth+15)p.x=-15;
-                    if(p.y<-15)p.y=innerHeight+15; if(p.y>innerHeight+15)p.y=-15;
-                    const alpha = Math.max(0.04, Math.min(0.25, p.brilho + Math.sin(tempo*2.5+p.fase)*p.varBrilho));
-                    ctx.beginPath(); ctx.arc(p.x,p.y,p.tam,0,Math.PI*2);
-                    ctx.fillStyle = `rgba(0,255,65,${alpha})`; ctx.fill();
-                    if(p.tam>1.8 && alpha>0.12){
-                        ctx.beginPath(); ctx.arc(p.x,p.y,p.tam*1.8,0,Math.PI*2);
-                        ctx.fillStyle = `rgba(0,255,65,${alpha*0.25})`; ctx.fill();
+            criarParticulas();
+
+            function desenharParticulas(timestamp) {
+                if (pausado) {
+                    animacaoId = requestAnimationFrame(desenharParticulas);
+                    return;
+                }
+
+                // Controle de frame rate para 60fps estáveis
+                if (timestamp - ultimoTimestamp < FRAME_ALVO) {
+                    animacaoId = requestAnimationFrame(desenharParticulas);
+                    return;
+                }
+                ultimoTimestamp = timestamp;
+
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                ctx.clearRect(0, 0, w, h);
+
+                const tempo = timestamp * 0.001;
+
+                for (let i = 0; i < particulas.length; i++) {
+                    const p = particulas[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < -15) p.x = w + 15;
+                    if (p.x > w + 15) p.x = -15;
+                    if (p.y < -15) p.y = h + 15;
+                    if (p.y > h + 15) p.y = -15;
+
+                    // Variação de brilho pulsante
+                    const brilhoAtual = p.brilho + Math.sin(tempo * 2.5 + p.fase) * p.variacaoBrilho;
+                    const alpha = Math.max(0.04, Math.min(0.25, brilhoAtual));
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.tamanho, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 255, 65, ' + alpha + ')';
+                    ctx.fill();
+
+                    // Brilho extra nas partículas maiores (fagulhas)
+                    if (p.tamanho > 1.8 && alpha > 0.12) {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.tamanho * 1.8, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(0, 255, 65, ' + (alpha * 0.25) + ')';
+                        ctx.fill();
                     }
                 }
-                requestAnimationFrame(desenhar);
+
+                animacaoId = requestAnimationFrame(desenharParticulas);
             }
-            const motion = matchMedia('(prefers-reduced-motion: reduce)');
-            if(!motion.matches) requestAnimationFrame(desenhar); else pausado=true;
-            motion.addEventListener('change', e=>{
+
+            const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (!motionQuery.matches) {
+                animacaoId = requestAnimationFrame(desenharParticulas);
+            } else {
+                pausado = true;
+            }
+            motionQuery.addEventListener('change', function(e) {
                 pausado = e.matches;
-                if(pausado && animacaoId) cancelAnimationFrame(animacaoId);
-                else if(!pausado){ ultimo=performance.now(); requestAnimationFrame(desenhar); }
-            });
-        }
-
-        function escaparHTML(t){ const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
-        function criarRipple(e,b){
-            const r=document.createElement('span'); r.className='ripple';
-            const rect=b.getBoundingClientRect(), tam=Math.max(rect.width,rect.height);
-            r.style.width=r.style.height=tam+'px';
-            r.style.left=(e.clientX-rect.left-tam/2)+'px';
-            r.style.top=(e.clientY-rect.top-tam/2)+'px';
-            b.appendChild(r); r.addEventListener('animationend',()=>r.remove());
-        }
-        function mostrarMsg(msg,cor){
-            if(!adminMensagem)return;
-            adminMensagem.textContent=msg; adminMensagem.style.color=cor||'var(--cor-primaria)';
-            setTimeout(()=>{if(adminMensagem)adminMensagem.textContent='';},3000);
-        }
-
-        function abrirModal(s){
-            if(!modalOverlay)return;
-            linkAtual=s.link_encurtado;
-            modalTitulo.textContent=s.title;
-            modalDesc.textContent=s.modal_description||s.description;
-            if(s.thumbnail?.trim()){
-                modalThumbnail.src=s.thumbnail; modalThumbnail.style.display='block'; modalThumbnail.classList.remove('placeholder');
-                modalThumbnail.onerror=()=>{ modalThumbnail.style.display='none'; mostrarPlaceholder(); };
-            }else{
-                modalThumbnail.style.display='none'; mostrarPlaceholder();
-            }
-            modalOverlay.classList.add('ativo'); modalOverlay.setAttribute('aria-hidden','false');
-            document.body.style.overflow='hidden';
-        }
-        function mostrarPlaceholder(){
-            if(!document.getElementById('thumb-ph')){
-                const ph=document.createElement('div'); ph.id='thumb-ph'; ph.className='modal-thumbnail placeholder';
-                ph.innerHTML='<span>📷 CAPA DO SCRIPT<br>(adicione o link no campo "thumbnail" do DB)</span>';
-                modalThumbnail.parentNode.insertBefore(ph, modalThumbnail.nextSibling);
-            }else document.getElementById('thumb-ph').style.display='flex';
-        }
-        function fecharModal(){
-            if(!modalOverlay)return;
-            modalOverlay.classList.remove('ativo'); modalOverlay.setAttribute('aria-hidden','true');
-            document.body.style.overflow='';
-            const ph=document.getElementById('thumb-ph'); if(ph)ph.style.display='none';
-            modalThumbnail.style.display='block';
-        }
-        modalClose?.addEventListener('click', fecharModal);
-        modalOverlay?.addEventListener('click', e=>{ if(e.target===modalOverlay)fecharModal(); });
-        document.addEventListener('keydown', e=>{
-            if(e.key==='Escape'){
-                if(modalOverlay?.classList.contains('ativo')) fecharModal();
-                if(adminOverlay?.classList.contains('ativo')) fecharAdmin();
-            }
-        });
-        modalProsseguir?.addEventListener('click', ()=>{ if(linkAtual){ open(linkAtual,'_blank','noopener,noreferrer'); fecharModal(); } });
-
-        function renderizarScripts(){
-            if(!containerScripts)return;
-            containerScripts.innerHTML = SCRIPTS_DB.map(s=>`
-                <article class="script-item" data-id="${s.id}" data-titulo="${escaparHTML(s.title).toLowerCase()}" data-descricao="${escaparHTML(s.description).toLowerCase()}">
-                    <div class="script-item-header">
-                        <h3 class="script-item-title">&gt; ${escaparHTML(s.title)}</h3>
-                        ${s.badge?`<span class="badge">${escaparHTML(s.badge)}</span>`:''}
-                    </div>
-                    <p class="script-item-desc">${escaparHTML(s.description)}</p>
-                    <div class="acoes-botoes">
-                        <button class="btn-obter" data-id="${s.id}">OBTER SCRIPT</button>
-                        <button class="btn-detalhes" aria-expanded="false">[+]</button>
-                    </div>
-                    <div class="script-details"><pre><code>${escaparHTML(s.codigo)}</code></pre>
-                        <button class="btn-copiar-codigo" data-codigo="${escaparHTML(s.codigo)}">📋 COPIAR CÓDIGO</button>
-                    </div>
-                </article>
-            `).join('');
-            if(contadorElemento) contadorElemento.textContent = SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
-            vincularEventosScripts();
-        }
-
-        function vincularEventosScripts(){
-            containerScripts.querySelectorAll('.btn-obter').forEach(b=>b.addEventListener('click', function(e){
-                criarRipple(e,this);
-                const id=+this.dataset.id; const s=SCRIPTS_DB.find(s=>s.id===id); if(s)abrirModal(s);
-            }));
-            containerScripts.querySelectorAll('.btn-detalhes').forEach(b=>b.addEventListener('click', function(e){
-                criarRipple(e,this); const item=this.closest('.script-item'); if(!item)return;
-                const exp=item.classList.toggle('expandido'); this.setAttribute('aria-expanded',exp); this.textContent=exp?'[-]':'[+]';
-            }));
-            containerScripts.querySelectorAll('.btn-copiar-codigo').forEach(b=>b.addEventListener('click', function(e){
-                criarRipple(e,this); const cod=this.dataset.codigo; if(!cod)return;
-                navigator.clipboard?.writeText(cod).then(()=>{
-                    this.classList.add('copiado'); this.innerHTML='✓ COPIADO!';
-                    setTimeout(()=>{ this.classList.remove('copiado'); this.innerHTML='📋 COPIAR CÓDIGO'; },2000);
-                }).catch(()=>{
-                    const ta=document.createElement('textarea'); ta.value=cod; ta.style.position='fixed'; ta.style.opacity='0';
-                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-                    this.classList.add('copiado'); this.innerHTML='✓ COPIADO!';
-                    setTimeout(()=>{ this.classList.remove('copiado'); this.innerHTML='📋 COPIAR CÓDIGO'; },2000);
-                });
-            }));
-        }
-
-        buscaInput?.addEventListener('input', function(){
-            const t=this.value.trim().toLowerCase(); const itens=document.querySelectorAll('.script-item'); let v=0;
-            itens.forEach(i=>{
-                const ti=i.dataset.titulo||'', de=i.dataset.descricao||'';
-                if(ti.includes(t)||de.includes(t)){ i.classList.remove('oculto'); v++; }
-                else i.classList.add('oculto');
-            });
-            if(contadorElemento) contadorElemento.textContent = t ? `${v} DE ${SCRIPTS_DB.length} SCRIPTS` : `${SCRIPTS_DB.length} SCRIPTS DISPONÍVEIS`;
-        });
-
-        function abrirAdmin(){
-            if(!adminOverlay)return;
-            adminOverlay.classList.add('ativo'); adminOverlay.setAttribute('aria-hidden','false');
-            document.body.style.overflow='hidden';
-            if(!auth.currentUser){
-                adminLoginDiv.style.display='flex'; adminContentDiv.classList.remove('visivel');
-            } else {
-                adminLoginDiv.style.display='none'; adminContentDiv.classList.add('visivel');
-                renderizarAdminScriptsList(); limparFormAdmin();
-            }
-            setTimeout(()=> adminEmailInput?.focus(), 400);
-        }
-        function fecharAdmin(){
-            if(!adminOverlay)return;
-            adminOverlay.classList.remove('ativo'); adminOverlay.setAttribute('aria-hidden','true');
-            document.body.style.overflow='';
-        }
-
-        onAuthStateChanged(auth, user => {
-            if (user) {
-                adminLoginDiv.style.display = 'none';
-                adminContentDiv.classList.add('visivel');
-                renderizarAdminScriptsList();
-                limparFormAdmin();
-                adminEmailInput.value = '';
-                adminSenhaInput.value = '';
-            } else {
-                adminLoginDiv.style.display = 'flex';
-                adminContentDiv.classList.remove('visivel');
-            }
-        });
-
-        adminLoginBtn?.addEventListener('click', async () => {
-            const email = adminEmailInput.value.trim();
-            const senha = adminSenhaInput.value;
-            if(!email||!senha){ adminErroSenha.textContent='⚠️ Preencha todos os campos.'; return; }
-            try {
-                await signInWithEmailAndPassword(auth, email, senha);
-            } catch(e) {
-                adminErroSenha.textContent = '⚠️ ' + (e.code==='auth/invalid-credential'?'E-mail ou senha inválidos.':e.message);
-            }
-        });
-        adminSenhaInput?.addEventListener('keydown', e=>{ if(e.key==='Enter') adminLoginBtn.click(); });
-        adminSairBtn?.addEventListener('click', ()=> signOut(auth));
-
-        function renderizarAdminScriptsList(){
-            if(!adminScriptsList)return;
-            if(!SCRIPTS_DB.length){ adminScriptsList.innerHTML='<p style="color:var(--cor-texto-secundario); text-align:center;">Nenhum script.</p>'; return; }
-            adminScriptsList.innerHTML = SCRIPTS_DB.map(s=>`
-                <div class="admin-script-item">
-                    <span>${escaparHTML(s.title)} ${s.badge?`<small style="color:var(--cor-admin);">[${escaparHTML(s.badge)}]</small>`:''}</span>
-                    <button class="btn-admin editar-admin" data-id="${s.id}" style="flex:0.5;padding:7px 10px;font-size:0.7rem;">✏️ EDITAR</button>
-                </div>
-            `).join('');
-            adminScriptsList.querySelectorAll('.editar-admin').forEach(b=>b.addEventListener('click', ()=>{
-                carregarEdicao(+b.dataset.id);
-            }));
-        }
-        function carregarEdicao(id){
-            const s = SCRIPTS_DB.find(s=>s.id===id); if(!s)return;
-            adminEditId.value = s.id;
-            adminTituloInput.value = s.title;
-            adminDescInput.value = s.description;
-            adminLinkInput.value = s.link_encurtado;
-            adminCodigoInput.value = s.codigo;
-            adminThumbInput.value = s.thumbnail||'';
-            adminBadgeInput.value = s.badge||'';
-            adminModalDescInput.value = s.modal_description||'';
-            adminExcluirBtn.style.display='inline-flex'; adminCancelarBtn.style.display='inline-flex';
-            adminSalvarBtn.textContent='💾 ATUALIZAR SCRIPT';
-            adminTituloInput.focus();
-            adminOverlay.querySelector('.admin-panel').scrollTop=0;
-        }
-        function limparFormAdmin(){
-            adminEditId.value=''; adminTituloInput.value=''; adminDescInput.value=''; adminLinkInput.value='';
-            adminCodigoInput.value=''; adminThumbInput.value=''; adminBadgeInput.value=''; adminModalDescInput.value='';
-            adminExcluirBtn.style.display='none'; adminCancelarBtn.style.display='none';
-            adminSalvarBtn.textContent='💾 SALVAR / ADICIONAR';
-        }
-        async function salvarScriptAdmin(){
-            const titulo = adminTituloInput.value.trim();
-            const link = adminLinkInput.value.trim();
-            if(!titulo||!link){ mostrarMsg('⚠️ Título e Link são obrigatórios!','#ff5f56'); return; }
-            const editId = adminEditId.value;
-            if(editId){
-                const idx = SCRIPTS_DB.findIndex(s=>s.id===+editId);
-                if(idx!==-1){
-                    SCRIPTS_DB[idx].title=titulo; SCRIPTS_DB[idx].description=adminDescInput.value.trim();
-                    SCRIPTS_DB[idx].link_encurtado=link; SCRIPTS_DB[idx].codigo=adminCodigoInput.value.trim();
-                    SCRIPTS_DB[idx].thumbnail=adminThumbInput.value.trim(); SCRIPTS_DB[idx].badge=adminBadgeInput.value.trim()||null;
-                    SCRIPTS_DB[idx].modal_description=adminModalDescInput.value.trim();
-                    const ok = await atualizarScript(SCRIPTS_DB[idx]);
-                    mostrarMsg(ok?'✅ Script atualizado!':'❌ Erro ao atualizar.', ok?'var(--cor-primaria)':'#ff5f56');
+                if (pausado && animacaoId) {
+                    cancelAnimationFrame(animacaoId);
+                    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                } else if (!pausado) {
+                    ultimoTimestamp = performance.now();
+                    animacaoId = requestAnimationFrame(desenharParticulas);
                 }
-            }else{
-                const novo = {
-                    id: gerarNovoId(), title: titulo, description: adminDescInput.value.trim(),
-                    link_encurtado: link, codigo: adminCodigoInput.value.trim(),
-                    thumbnail: adminThumbInput.value.trim(), badge: adminBadgeInput.value.trim()||null,
-                    modal_description: adminModalDescInput.value.trim()
-                };
-                const ok = await adicionarScript(novo);
-                if(ok){ SCRIPTS_DB.push(novo); mostrarMsg('✅ Script adicionado!'); }
-                else mostrarMsg('❌ Erro ao salvar.','#ff5f56');
-            }
-            limparFormAdmin(); renderizarScripts(); renderizarAdminScriptsList();
-            if(contadorElemento) contadorElemento.textContent = SCRIPTS_DB.length+' SCRIPTS DISPONÍVEIS';
-        }
-        async function excluirScriptAdmin(){
-            const editId = adminEditId.value; if(!editId)return;
-            if(!confirm('Excluir permanentemente?'))return;
-            const s = SCRIPTS_DB.find(s=>s.id===+editId); if(!s)return;
-            const ok = await deletarScript(s);
-            if(ok){ SCRIPTS_DB = SCRIPTS_DB.filter(s=>s.id!==+editId); mostrarMsg('🗑️ Script excluído.','#ff5f56'); }
-            else mostrarMsg('❌ Erro ao excluir.','#ff5f56');
-            limparFormAdmin(); renderizarScripts(); renderizarAdminScriptsList();
-            if(contadorElemento) contadorElemento.textContent = SCRIPTS_DB.length+' SCRIPTS DISPONÍVEIS';
-        }
-
-        adminSalvarBtn?.addEventListener('click', salvarScriptAdmin);
-        adminExcluirBtn?.addEventListener('click', excluirScriptAdmin);
-        adminCancelarBtn?.addEventListener('click', ()=>{ limparFormAdmin(); mostrarMsg('Edição cancelada.','var(--cor-texto-secundario)'); });
-        adminToggleBtn?.addEventListener('click', abrirAdmin);
-        adminClose?.addEventListener('click', fecharAdmin);
-        adminOverlay?.addEventListener('click', e=>{ if(e.target===adminOverlay) fecharAdmin(); });
-
-        const tituloEl = document.getElementById('titulo-principal');
-        let idxLetra=0;
-        function digitarTitulo(){
-            if(!tituloEl)return;
-            if(idxLetra<7){
-                tituloEl.textContent='DamonUX'.substring(0,idxLetra+1); idxLetra++;
-                setTimeout(digitarTitulo,85+Math.random()*40);
-            }else{
-                const c=document.createElement('span'); c.className='cursor-piscante'; c.textContent='_'; tituloEl.appendChild(c);
-                agendarGlitch(); digitarBoasVindas();
-            }
-        }
-        function agendarGlitch(){
-            if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-            setTimeout(()=>{
-                if(tituloEl){ tituloEl.classList.add('efect-glitch'); setTimeout(()=>{ tituloEl.classList.remove('efect-glitch'); agendarGlitch(); },350); }
-            },5000+Math.random()*10000);
-        }
-        const welcomeEl = document.getElementById('welcome-typing');
-        function digitarBoasVindas(){
-            if(!welcomeEl)return;
-            let i=0; const msg='Olá, seja bem-vindo(a) à nossa central de scripts!';
-            welcomeEl.textContent='';
-            function dig(){ if(i<msg.length){ welcomeEl.textContent+=msg.charAt(i); i++; setTimeout(dig,30+Math.random()*20); } }
-            dig();
-        }
-        if(tituloEl && !matchMedia('(prefers-reduced-motion: reduce)').matches) digitarTitulo();
-        else if(tituloEl){ tituloEl.textContent='DamonUX'; const c=document.createElement('span'); c.className='cursor-piscante'; c.textContent='_'; tituloEl.appendChild(c); welcomeEl.textContent='Olá, seja bem-vindo(a) à nossa central de scripts!'; }
-
-        const uptimeEl=document.getElementById('uptime'), usuariosEl=document.getElementById('online-users');
-        function atualizarUptime(){
-            if(!uptimeEl)return;
-            const agora=new Date(), diff=Math.max(0,Math.floor((agora-new Date('2024-01-15'))/1000));
-            const d=Math.floor(diff/86400), h=Math.floor((diff%86400)/3600), m=Math.floor((diff%3600)/60);
-            uptimeEl.textContent=`UPTIME ${d}d ${h}h ${m}m`;
-        }
-        setInterval(atualizarUptime,60000); atualizarUptime();
-        setInterval(()=>{ if(usuariosEl) usuariosEl.textContent = Math.floor(Math.random()*121+60)+' ONLINE'; },45000);
-        atualizarUptime(); if(usuariosEl) usuariosEl.textContent = Math.floor(Math.random()*121+60)+' ONLINE';
-
-        document.getElementById('ano-atual').textContent = new Date().getFullYear();
-
-        document.querySelectorAll('.faq-question').forEach(q=>{
-            q.addEventListener('click', function(){
-                const item=this.closest('.faq-item'); if(!item)return;
-                const estava=item.classList.contains('ativa');
-                document.querySelectorAll('.faq-item').forEach(f=>{ f.classList.remove('ativa'); f.querySelector('.faq-question')?.setAttribute('aria-expanded','false'); });
-                if(!estava){ item.classList.add('ativa'); this.setAttribute('aria-expanded','true'); }
             });
-            q.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); q.click(); } });
-        });
 
-        carregarScriptsDoFirestore();
+            // =========================================
+            // FUNÇÕES UTILITÁRIAS
+            // =========================================
+            function escaparHTML(texto) {
+                const div = document.createElement('div');
+                div.textContent = texto;
+                return div.innerHTML;
+            }
+
+            function criarRipple(evento, botao) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = botao.getBoundingClientRect();
+                const tamanho = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = tamanho + 'px';
+                ripple.style.left = (evento.clientX - rect.left - tamanho / 2) + 'px';
+                ripple.style.top = (evento.clientY - rect.top - tamanho / 2) + 'px';
+                botao.appendChild(ripple);
+                ripple.addEventListener('animationend', function() {
+                    ripple.remove();
+                });
+            }
+
+            // =========================================
+            // MODAL
+            // =========================================
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalThumbnail = document.getElementById('modal-thumbnail');
+            const modalTitulo = document.getElementById('modal-titulo');
+            const modalDesc = document.getElementById('modal-desc');
+            const modalProsseguir = document.getElementById('modal-prosseguir');
+            const modalClose = document.getElementById('modal-close');
+            let linkAtual = '';
+
+            if (!modalOverlay || !modalThumbnail || !modalTitulo || !modalDesc || !modalProsseguir || !modalClose) {
+                console.warn('Elementos do modal não encontrados no DOM.');
+            }
+
+            function abrirModal(script) {
+                if (!modalOverlay) return;
+                linkAtual = script.link_encurtado;
+                modalTitulo.textContent = script.title;
+                modalDesc.textContent = script.modal_description || script.description;
+
+                if (script.thumbnail && script.thumbnail.trim() !== '') {
+                    modalThumbnail.src = script.thumbnail;
+                    modalThumbnail.style.display = 'block';
+                    modalThumbnail.classList.remove('placeholder');
+                    modalThumbnail.onerror = function() {
+                        modalThumbnail.style.display = 'none';
+                        mostrarPlaceholderThumbnail();
+                    };
+                } else {
+                    modalThumbnail.style.display = 'none';
+                    mostrarPlaceholderThumbnail();
+                }
+
+                modalOverlay.classList.add('ativo');
+                modalOverlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function mostrarPlaceholderThumbnail() {
+                if (!document.getElementById('thumbnail-placeholder')) {
+                    const placeholder = document.createElement('div');
+                    placeholder.id = 'thumbnail-placeholder';
+                    placeholder.className = 'modal-thumbnail placeholder';
+                    placeholder.innerHTML = '<span>📷 CAPA DO SCRIPT<br>(adicione o link no campo "thumbnail" do DB)</span>';
+                    if (modalThumbnail && modalThumbnail.parentNode) {
+                        modalThumbnail.parentNode.insertBefore(placeholder, modalThumbnail.nextSibling);
+                    }
+                } else {
+                    const ph = document.getElementById('thumbnail-placeholder');
+                    if (ph) ph.style.display = 'flex';
+                }
+            }
+
+            function fecharModal() {
+                if (!modalOverlay) return;
+                modalOverlay.classList.remove('ativo');
+                modalOverlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                const placeholder = document.getElementById('thumbnail-placeholder');
+                if (placeholder) placeholder.style.display = 'none';
+                if (modalThumbnail) modalThumbnail.style.display = 'block';
+            }
+
+            if (modalClose) {
+                modalClose.addEventListener('click', fecharModal);
+            }
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', function(e) {
+                    if (e.target === modalOverlay) fecharModal();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('ativo')) {
+                    fecharModal();
+                }
+            });
+
+            if (modalProsseguir) {
+                modalProsseguir.addEventListener('click', function() {
+                    if (linkAtual) {
+                        window.open(linkAtual, '_blank', 'noopener,noreferrer');
+                        fecharModal();
+                    }
+                });
+            }
+
+            // =========================================
+            // RENDERIZAÇÃO DA LISTA DE SCRIPTS
+            // =========================================
+            const containerScripts = document.getElementById('scripts-list');
+            const contadorElemento = document.getElementById('contador-scripts');
+
+            function renderizarScripts() {
+                if (!containerScripts) return;
+                containerScripts.innerHTML = SCRIPTS_DB.map(script => `
+                    <article class="script-item" data-id="${script.id}" data-titulo="${escaparHTML(script.title).toLowerCase()}" data-descricao="${escaparHTML(script.description).toLowerCase()}">
+                        <div class="script-item-header">
+                            <h3 class="script-item-title">&gt; ${escaparHTML(script.title)}</h3>
+                            ${script.badge ? '<span class="badge">' + escaparHTML(script.badge) + '</span>' : ''}
+                        </div>
+                        <p class="script-item-desc">${escaparHTML(script.description)}</p>
+                        <div class="acoes-botoes">
+                            <button class="btn-obter" data-id="${script.id}" aria-label="Obter ${escaparHTML(script.title)}">
+                                <span class="btn-texto">OBTER SCRIPT</span>
+                            </button>
+                            <button class="btn-detalhes" aria-label="Ver detalhes de ${escaparHTML(script.title)}" aria-expanded="false">
+                                [+]
+                            </button>
+                        </div>
+                        <div class="script-details">
+                            <pre><code>${escaparHTML(script.codigo)}</code></pre>
+                            <button class="btn-copiar-codigo" data-codigo="${escaparHTML(script.codigo)}" aria-label="Copiar código">
+                                📋 COPIAR CÓDIGO
+                            </button>
+                        </div>
+                    </article>
+                `).join('');
+
+                if (contadorElemento) {
+                    contadorElemento.textContent = SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
+                }
+
+                vincularEventosScripts();
+            }
+
+            function vincularEventosScripts() {
+                if (!containerScripts) return;
+
+                containerScripts.querySelectorAll('.btn-obter').forEach(botao => {
+                    botao.addEventListener('click', function(e) {
+                        if (this.classList.contains('loading')) return;
+                        criarRipple(e, this);
+                        const id = parseInt(this.getAttribute('data-id'));
+                        const script = SCRIPTS_DB.find(function(s) { return s.id === id; });
+                        if (script) {
+                            abrirModal(script);
+                        }
+                    });
+                });
+
+                containerScripts.querySelectorAll('.btn-detalhes').forEach(botao => {
+                    botao.addEventListener('click', function(e) {
+                        criarRipple(e, this);
+                        const item = this.closest('.script-item');
+                        if (!item) return;
+                        const expandido = item.classList.toggle('expandido');
+                        this.setAttribute('aria-expanded', expandido);
+                        this.textContent = expandido ? '[-]' : '[+]';
+                    });
+                });
+
+                containerScripts.querySelectorAll('.btn-copiar-codigo').forEach(botao => {
+                    botao.addEventListener('click', function(e) {
+                        criarRipple(e, this);
+                        const codigo = this.getAttribute('data-codigo');
+                        if (!codigo) return;
+                        navigator.clipboard.writeText(codigo).then(function() {
+                            botao.classList.add('copiado');
+                            botao.innerHTML = '✓ COPIADO!';
+                            setTimeout(function() {
+                                botao.classList.remove('copiado');
+                                botao.innerHTML = '📋 COPIAR CÓDIGO';
+                            }, 2000);
+                        }).catch(function() {
+                            const textarea = document.createElement('textarea');
+                            textarea.value = codigo;
+                            textarea.style.position = 'fixed';
+                            textarea.style.opacity = '0';
+                            document.body.appendChild(textarea);
+                            textarea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textarea);
+                            botao.classList.add('copiado');
+                            botao.innerHTML = '✓ COPIADO!';
+                            setTimeout(function() {
+                                botao.classList.remove('copiado');
+                                botao.innerHTML = '📋 COPIAR CÓDIGO';
+                            }, 2000);
+                        });
+                    });
+                });
+            }
+
+            // =========================================
+            // FILTRO DE BUSCA
+            // =========================================
+            const buscaInput = document.getElementById('busca-scripts');
+            if (buscaInput) {
+                buscaInput.addEventListener('input', function() {
+                    const termo = this.value.trim().toLowerCase();
+                    const itens = document.querySelectorAll('.script-item');
+                    let visiveis = 0;
+
+                    itens.forEach(function(item) {
+                        const titulo = item.getAttribute('data-titulo') || '';
+                        const descricao = item.getAttribute('data-descricao') || '';
+                        const corresponde = titulo.includes(termo) || descricao.includes(termo);
+
+                        if (corresponde) {
+                            item.classList.remove('oculto');
+                            visiveis++;
+                        } else {
+                            item.classList.add('oculto');
+                        }
+                    });
+
+                    if (contadorElemento) {
+                        contadorElemento.textContent = termo ?
+                            visiveis + ' DE ' + SCRIPTS_DB.length + ' SCRIPTS' :
+                            SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
+                    }
+                });
+            }
+
+            // =========================================
+            // EFEITO DE DIGITAÇÃO NO TÍTULO
+            // =========================================
+            const tituloElemento = document.getElementById('titulo-principal');
+            const textoOriginal = 'DamonUX';
+            let indiceLetra = 0;
+
+            function digitarTitulo() {
+                if (!tituloElemento) return;
+                if (indiceLetra < textoOriginal.length) {
+                    tituloElemento.textContent = textoOriginal.substring(0, indiceLetra + 1);
+                    indiceLetra++;
+                    setTimeout(digitarTitulo, 85 + Math.random() * 40);
+                } else {
+                    const cursor = document.createElement('span');
+                    cursor.classList.add('cursor-piscante');
+                    cursor.setAttribute('aria-hidden', 'true');
+                    cursor.textContent = '_';
+                    tituloElemento.appendChild(cursor);
+                    agendarGlitch();
+                    digitarBoasVindas();
+                }
+            }
+
+            function agendarGlitch() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const delay = 5000 + Math.random() * 10000;
+                setTimeout(function() {
+                    if (tituloElemento) {
+                        tituloElemento.classList.add('efect-glitch');
+                        setTimeout(function() {
+                            if (tituloElemento) tituloElemento.classList.remove('efect-glitch');
+                            agendarGlitch();
+                        }, 350);
+                    }
+                }, delay);
+            }
+
+            const welcomeElement = document.getElementById('welcome-typing');
+            const mensagemBoasVindas = 'Olá, seja bem-vindo(a) à nossa central de scripts!';
+
+            function digitarBoasVindas() {
+                if (!welcomeElement) return;
+                let i = 0;
+
+                function digitar() {
+                    if (i < mensagemBoasVindas.length) {
+                        welcomeElement.textContent += mensagemBoasVindas.charAt(i);
+                        i++;
+                        setTimeout(digitar, 30 + Math.random() * 20);
+                    }
+                }
+                welcomeElement.textContent = '';
+                digitar();
+            }
+
+            if (tituloElemento && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                digitarTitulo();
+            } else if (tituloElemento) {
+                tituloElemento.textContent = textoOriginal;
+                const cursor = document.createElement('span');
+                cursor.classList.add('cursor-piscante');
+                cursor.setAttribute('aria-hidden', 'true');
+                cursor.textContent = '_';
+                tituloElemento.appendChild(cursor);
+                if (welcomeElement) welcomeElement.textContent = mensagemBoasVindas;
+            }
+
+            // =========================================
+            // UPTIME E USUÁRIOS ONLINE
+            // =========================================
+            const DATA_INICIO = new Date('2024-01-15T00:00:00');
+            const uptimeElemento = document.getElementById('uptime');
+            const usuariosElemento = document.getElementById('online-users');
+
+            function atualizarUptime() {
+                if (!uptimeElemento) return;
+                const agora = new Date();
+                let diffSegundos = Math.floor((agora - DATA_INICIO) / 1000);
+                if (diffSegundos < 0) diffSegundos = 0;
+                const dias = Math.floor(diffSegundos / 86400);
+                diffSegundos -= dias * 86400;
+                const horas = Math.floor(diffSegundos / 3600);
+                diffSegundos -= horas * 3600;
+                const minutos = Math.floor(diffSegundos / 60);
+                uptimeElemento.textContent = 'UPTIME ' + dias + 'd ' + horas + 'h ' + minutos + 'm';
+            }
+
+            function atualizarUsuarios() {
+                if (!usuariosElemento) return;
+                const usuarios = Math.floor(Math.random() * 121) + 60;
+                usuariosElemento.textContent = usuarios + ' ONLINE';
+            }
+
+            atualizarUptime();
+            atualizarUsuarios();
+            setInterval(atualizarUptime, 60000);
+            setInterval(atualizarUsuarios, 45000);
+
+            // =========================================
+            // ANO NO RODAPÉ
+            // =========================================
+            const anoElemento = document.getElementById('ano-atual');
+            if (anoElemento) {
+                anoElemento.textContent = new Date().getFullYear();
+            }
+
+            // =========================================
+            // FAQ INTERATIVA
+            // =========================================
+            document.querySelectorAll('.faq-question').forEach(function(pergunta) {
+                pergunta.addEventListener('click', function() {
+                    const item = this.closest('.faq-item');
+                    if (!item) return;
+                    const estavaAtiva = item.classList.contains('ativa');
+                    document.querySelectorAll('.faq-item').forEach(function(faq) {
+                        faq.classList.remove('ativa');
+                        const q = faq.querySelector('.faq-question');
+                        if (q) q.setAttribute('aria-expanded', 'false');
+                    });
+                    if (!estavaAtiva) {
+                        item.classList.add('ativa');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                pergunta.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            // =========================================
+            // INICIALIZAÇÃO
+            // =========================================
+            renderizarScripts();
+
+        })();
     </script>
 </body>
 </html>
