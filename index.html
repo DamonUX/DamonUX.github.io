@@ -178,22 +178,22 @@
             position: relative;
         }
 
-        .cursor-piscante {
+               .cursor-piscante {
             display: inline-block;
-            animation: piscar 1.1s step-end infinite;
+            /* Mudamos de step-end para linear para permitir a transição suave */
+            animation: piscar 1s linear infinite;
             vertical-align: baseline;
         }
 
         @keyframes piscar {
-            0%,
-            49% {
+            0%, 100% {
                 opacity: 1;
             }
-            50%,
-            100% {
+            50% {
                 opacity: 0;
             }
         }
+
 
         /* Efeito glitch aplicado dinamicamente via JS */
         .efect-glitch {
