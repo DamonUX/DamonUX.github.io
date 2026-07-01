@@ -3,606 +3,937 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScriptBlox Clone Ultra – GitHub Pages</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>ScriptBlox — Premium Script Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* =========================================
-           1. VARIÁVEIS & RESET (Otimização Global)
-           ========================================= */
         :root {
-            --bg-base: #09090b; /* Fundo super escuro */
-            --bg-surface: rgba(24, 24, 27, 0.6); /* Efeito vidro */
-            --bg-surface-solid: #18181b;
-            --text-main: #f4f4f5;
-            --text-muted: #a1a1aa;
-            --primary: #6366f1; /* Índigo moderno */
-            --primary-hover: #4f46e5;
-            --secondary: #ec4899; /* Rosa para gradientes */
-            --border-color: rgba(255, 255, 255, 0.08);
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --glow: 0 0 20px rgba(99, 102, 241, 0.15);
+            --bg-deep: #08090f;
+            --surface-glass: rgba(18, 20, 30, 0.55);
+            --surface-glass-hover: rgba(22, 24, 36, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(99, 102, 241, 0.35);
+            --neon-indigo: #6366f1;
+            --neon-purple: #a855f7;
+            --neon-cyan: #22d3ee;
+            --glow-indigo: rgba(99, 102, 241, 0.45);
+            --glow-purple: rgba(168, 85, 247, 0.35);
+            --text-primary: #f0f0f5;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --radius-card: 18px;
+            --radius-btn: 50px;
+            --radius-input: 60px;
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 20px var(--glow-indigo), 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
-
-        /* Scrollbar customizada */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-base); }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.08), transparent 25%);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        a { text-decoration: none; color: inherit; }
-        button, input { border: none; outline: none; font-family: inherit; }
+        /* Animated background orbs */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            will-change: transform;
+            animation: orbFloat 25s infinite ease-in-out alternate;
+        }
+        .orb-1 {
+            width: 70vw;
+            height: 70vw;
+            max-width: 900px;
+            max-height: 900px;
+            background: radial-gradient(circle at 30% 30%, var(--neon-indigo), transparent 70%);
+            top: -20%;
+            left: -15%;
+            animation-duration: 28s;
+        }
+        .orb-2 {
+            width: 60vw;
+            height: 60vw;
+            max-width: 700px;
+            max-height: 700px;
+            background: radial-gradient(circle at 70% 60%, var(--neon-purple), transparent 70%);
+            bottom: -20%;
+            right: -10%;
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+        .orb-3 {
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: radial-gradient(circle at 50% 50%, var(--neon-cyan), transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.06;
+            animation-duration: 20s;
+            animation-delay: -12s;
+        }
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(5vw, -4vh) scale(1.08);
+            }
+            50% {
+                transform: translate(-3vw, 6vh) scale(0.94);
+            }
+            75% {
+                transform: translate(-6vw, -2vh) scale(1.04);
+            }
+            100% {
+                transform: translate(2vw, 3vh) scale(0.98);
+            }
+        }
 
-        /* =========================================
-           2. HEADER & NAVBAR (Glassmorphism)
-           ========================================= */
+        /* Glassmorphism mixin via classes */
+        .glass {
+            background: var(--surface-glass);
+            backdrop-filter: blur(18px) saturate(120%);
+            -webkit-backdrop-filter: blur(18px) saturate(120%);
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .glass-strong {
+            background: rgba(22, 24, 36, 0.7);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        .glass-card {
+            background: rgba(20, 22, 33, 0.45);
+            backdrop-filter: blur(14px) saturate(110%);
+            -webkit-backdrop-filter: blur(14px) saturate(110%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-card);
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+            will-change: transform, box-shadow, border-color;
+        }
+        .glass-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.6);
+        }
+
+        /* Layout */
         .navbar {
-            background: var(--bg-surface);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: var(--transition);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            letter-spacing: -0.5px;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.8rem 1.8rem;
+            flex-wrap: wrap;
+            background: rgba(12, 13, 20, 0.75);
+            backdrop-filter: blur(25px) saturate(140%);
+            -webkit-backdrop-filter: blur(25px) saturate(140%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
         }
-
-        .search-box {
-            position: relative;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            background: linear-gradient(135deg, #818cf8, #c084fc, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 25px rgba(129, 140, 248, 0.4);
+            transition: filter 0.3s;
+            cursor: default;
+        }
+        .logo i {
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+        }
+        .logo:hover {
+            filter: brightness(1.2);
+        }
+        .search-wrapper {
             flex: 1;
-            max-width: 450px;
-            margin: 0 2rem;
+            max-width: 520px;
+            min-width: 220px;
+            position: relative;
         }
-
-        .search-box input {
+        .search-input {
             width: 100%;
-            padding: 0.8rem 1.2rem 0.8rem 3rem;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
+            padding: 0.75rem 1.2rem 0.75rem 3rem;
+            border-radius: var(--radius-input);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(18, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-primary);
             font-size: 0.95rem;
-            transition: var(--transition);
+            font-weight: 500;
+            outline: none;
+            transition: all var(--transition-smooth);
+            letter-spacing: 0.2px;
         }
-
-        .search-box input:focus {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-            box-shadow: var(--glow);
+        .search-input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
         }
-
-        .search-box i {
+        .search-input:focus {
+            border-color: var(--neon-indigo);
+            box-shadow: 0 0 18px var(--glow-indigo), 0 0 35px rgba(99, 102, 241, 0.2);
+            background: rgba(22, 25, 38, 0.75);
+        }
+        .search-icon {
             position: absolute;
             left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            transition: color 0.3s;
         }
-        .search-box input:focus + i { color: var(--primary); }
-
-        .nav-links { display: flex; align-items: center; gap: 2rem; }
-        .nav-links a { font-weight: 500; color: var(--text-muted); transition: var(--transition); }
-        .nav-links a:hover { color: var(--text-main); }
-        
-        .btn-login {
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: white !important;
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: var(--glow);
-            transition: var(--transition);
+        .search-input:focus+.search-icon {
+            color: var(--neon-indigo);
         }
-        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4); }
-
-        /* =========================================
-           3. LAYOUT PRINCIPAL (Grid & Flexbox)
-           ========================================= */
-        .main-container {
+        .nav-links {
             display: flex;
-            flex: 1;
-            padding: 2rem 3rem;
-            gap: 2.5rem;
-            max-width: 1600px;
-            margin: 0 auto;
+            align-items: center;
+            gap: 1.8rem;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s, text-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-indigo);
+            border-radius: 2px;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px var(--glow-indigo);
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+        }
+        .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* =========================================
-           4. SIDEBAR (Filtros Estilizados)
-           ========================================= */
-        .sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
+        /* Main container */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.8rem;
+            flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
-        .sidebar h3 {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            margin-bottom: 1.2rem;
+        /* Sidebar / Filter bar */
+        .filter-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .filter-sidebar h3 {
+            font-size: 1.1rem;
             font-weight: 600;
-            padding-left: 0.5rem;
-        }
-
-        .filter-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        
-        .filter-list li {
-            padding: 0.8rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            border: 1px solid transparent;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
         }
-
-        .filter-list li i { font-size: 1.1rem; width: 20px; text-align: center; }
-        .filter-list li:hover { background: rgba(255, 255, 255, 0.03); color: var(--text-main); }
-        
-        .filter-list li.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            border-left: 3px solid var(--primary);
-            color: var(--text-main);
+        .filter-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(22, 24, 36, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            user-select: none;
+        }
+        .filter-chip:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #d1d5db;
+            background: rgba(30, 32, 48, 0.7);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+        .filter-chip.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--neon-indigo);
+            color: white;
             font-weight: 600;
+            box-shadow: 0 0 18px var(--glow-indigo);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
-        .filter-list li.active i { color: var(--primary); }
 
-        /* =========================================
-           5. CONTEÚDO & CARDS (Animações e Efeitos)
-           ========================================= */
-        .content { flex: 1; display: flex; flex-direction: column; gap: 2rem; min-width: 0; }
-
+        /* Content area */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
         .sort-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-surface);
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-
-        .result-count { font-weight: 500; color: var(--text-muted); }
-        .result-count strong { color: var(--text-main); }
-
-        .sort-options { display: flex; gap: 0.8rem; }
-        .sort-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            padding: 0.6rem 1.2rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
+        .result-count {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
             font-weight: 500;
-            font-size: 0.85rem;
         }
-        .sort-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
-        .sort-btn.active { background: var(--primary); color: white; box-shadow: var(--glow); }
+        .sort-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .sort-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(22, 24, 36, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            user-select: none;
+        }
+        .sort-btn.active,
+        .sort-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--neon-indigo);
+            color: white;
+            box-shadow: 0 0 15px var(--glow-indigo);
+        }
+        .sort-btn.active {
+            font-weight: 700;
+            box-shadow: 0 0 20px var(--glow-indigo);
+        }
 
-        /* Grid de Scripts */
+        /* Script Grid */
         .script-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.2rem;
         }
-
-        /* Animação de entrada dos cards */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .script-card {
-            background: var(--bg-surface-solid);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            position: relative;
-            animation: fadeUp 0.5s ease backwards;
+            overflow: hidden;
+            cursor: default;
+            animation: fadeInUp 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            opacity: 0;
         }
-
-        .script-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), var(--glow);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-
         .card-img {
-            height: 120px;
-            background: linear-gradient(145deg, #18181b, #27272a);
+            height: 110px;
+            background: linear-gradient(145deg, rgba(30, 32, 45, 0.7), rgba(20, 22, 33, 0.9));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             position: relative;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        
-        .card-img::after {
-            content: '';
+        .card-img .game-icon {
+            filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.5));
+            transition: transform 0.3s;
+        }
+        .script-card:hover .card-img .game-icon {
+            transform: scale(1.15) rotate(-2deg);
+        }
+        .badge-new {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5));
-        }
-
-        .card-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-        
-        .game-badge {
-            align-self: flex-start;
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            top: 10px;
+            right: 12px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
             font-size: 0.7rem;
             font-weight: 700;
-            text-transform: uppercase;
+            padding: 0.25rem 0.7rem;
+            border-radius: 30px;
             letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+            text-transform: uppercase;
         }
-
+        .card-body {
+            padding: 1rem 1rem 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
         .script-name {
             font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.3;
-            color: var(--text-main);
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            font-size: 1rem;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
+            color: white;
+            letter-spacing: 0.1px;
         }
-
-        .author { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
-        .author i { color: var(--secondary); font-size: 0.7rem; }
-
-        .card-footer {
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
+        .game-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #818cf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .author {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .card-stats {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .card-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .card-stats i {
+            font-size: 0.7rem;
+            opacity: 0.8;
         }
 
-        .card-stats { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
-        .card-stats span { display: flex; align-items: center; gap: 0.4rem; }
-        .card-stats i { color: var(--primary); }
-
-        /* Botão falso de "Pegar Script" no hover */
-        .get-script-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: var(--primary);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            opacity: 0;
-            transition: var(--transition);
-            z-index: 10;
-            box-shadow: var(--glow);
-            cursor: pointer;
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
         }
-        .script-card:hover .get-script-btn {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .script-card:hover .card-img span { filter: blur(3px); opacity: 0.5; } /* Embaça o emoji no hover */
-
-        /* =========================================
-           6. PAGINAÇÃO & FOOTER
-           ========================================= */
-        .pagination { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
-        
         .page-btn {
-            background: var(--bg-surface-solid);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
             width: 40px;
             height: 40px;
-            border-radius: var(--radius-sm);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
+            transition: all var(--transition-smooth);
+            font-weight: 700;
+            font-size: 0.85rem;
+            background: rgba(20, 22, 33, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            user-select: none;
         }
-        .page-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--text-main); }
-        .page-btn.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: var(--glow); }
-        .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .page-btn.active {
+            background: rgba(99, 102, 241, 0.25);
+            border-color: var(--neon-indigo);
+            color: white;
+            box-shadow: 0 0 18px var(--glow-indigo);
+        }
+        .page-btn:hover:not(.active):not(:disabled) {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(30, 32, 48, 0.7);
+            color: #d1d5db;
+        }
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
 
+        /* Footer */
         .footer {
-            background: var(--bg-surface-solid);
-            border-top: 1px solid var(--border-color);
+            background: rgba(12, 13, 20, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: auto;
+            font-weight: 500;
+            z-index: 1;
+            position: relative;
         }
-        .footer span { color: var(--secondary); font-weight: 600; }
+        .footer span {
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
 
-        /* =========================================
-           7. RESPONSIVIDADE (Mobile First Concepts)
-           ========================================= */
-        @media (max-width: 992px) {
-            .main-container { flex-direction: column; padding: 1.5rem; }
-            .sidebar { width: 100%; position: static; display: flex; flex-direction: column; }
-            .filter-list { flex-direction: row; flex-wrap: wrap; }
-            .filter-list li { flex: 1 1 calc(33.33% - 0.5rem); justify-content: center; }
-            .navbar { padding: 1rem; flex-direction: column; gap: 1rem; }
-            .search-box { margin: 0; max-width: 100%; width: 100%; }
-            .nav-links { width: 100%; justify-content: center; }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.7rem 1rem;
+                gap: 0.8rem;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .logo {
+                font-size: 1.5rem;
+                justify-content: center;
+            }
+            .search-wrapper {
+                max-width: 100%;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 1.2rem;
+                flex-wrap: wrap;
+            }
+            .main-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .script-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 0.8rem;
+            }
+            .card-img {
+                height: 85px;
+                font-size: 2.4rem;
+            }
+            .sort-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .filter-list {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 0.4rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            .filter-chip {
+                flex-shrink: 0;
+                font-size: 0.8rem;
+                padding: 0.4rem 0.9rem;
+            }
         }
-        @media (max-width: 600px) {
-            .filter-list li { flex: 1 1 100%; }
-            .sort-bar { flex-direction: column; gap: 1rem; align-items: flex-start; }
-            .sort-options { width: 100%; justify-content: space-between; }
+        @media (min-width: 769px) {
+            .main-container {
+                grid-template-columns: 250px 1fr;
+                align-items: start;
+                max-width: 1300px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .filter-sidebar {
+                position: sticky;
+                top: 100px;
+                background: rgba(18, 20, 30, 0.4);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 1.5rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            }
+            .filter-list {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .filter-chip {
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
     <nav class="navbar">
         <div class="logo">
             <i class="fas fa-cube"></i> ScriptBlox
         </div>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Buscar scripts, jogos ou autores..." autocomplete="off">
-            <i class="fas fa-search"></i>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" id="searchInput" placeholder="Buscar scripts por nome, jogo ou autor...">
+            <i class="fas fa-search search-icon"></i>
         </div>
         <div class="nav-links">
             <a href="#"><i class="fas fa-home"></i> Início</a>
             <a href="#"><i class="fas fa-fire"></i> Populares</a>
-            <a href="#" class="btn-login"><i class="fas fa-user"></i> Entrar</a>
+            <a href="#"><i class="fas fa-compass"></i> Explorar</a>
         </div>
     </nav>
 
     <div class="main-container">
-        
-        <aside class="sidebar">
-            <h3><i class="fas fa-layer-group"></i> Categorias</h3>
+        <aside class="filter-sidebar">
+            <h3><i class="fas fa-gamepad" style="color: #a78bfa;"></i> Jogos</h3>
             <ul class="filter-list" id="gameFilter">
-                <li data-game="all" class="active"><i class="fas fa-globe"></i> Todos os Jogos</li>
-                <li data-game="Blox Fruits"><i class="fas fa-apple-alt"></i> Blox Fruits</li>
-                <li data-game="Adopt Me!"><i class="fas fa-dog"></i> Adopt Me!</li>
-                <li data-game="Murder Mystery 2"><i class="fas fa-mask"></i> Murder M. 2</li>
-                <li data-game="Pet Simulator X"><i class="fas fa-paw"></i> Pet Simulator X</li>
-                <li data-game="Jailbreak"><i class="fas fa-lock"></i> Jailbreak</li>
-                <li data-game="Brookhaven"><i class="fas fa-city"></i> Brookhaven</li>
+                <li class="filter-chip active" data-game="all"><i class="fas fa-globe-americas"></i> Todos</li>
+                <li class="filter-chip" data-game="Blox Fruits"><i class="fas fa-apple-alt"></i> Blox Fruits</li>
+                <li class="filter-chip" data-game="Adopt Me!"><i class="fas fa-dog"></i> Adopt Me!</li>
+                <li class="filter-chip" data-game="Murder Mystery 2"><i class="fas fa-mask"></i> Murder Mystery 2</li>
+                <li class="filter-chip" data-game="Pet Simulator X"><i class="fas fa-paw"></i> Pet Simulator X</li>
+                <li class="filter-chip" data-game="Jailbreak"><i class="fas fa-lock"></i> Jailbreak</li>
+                <li class="filter-chip" data-game="Brookhaven"><i class="fas fa-city"></i> Brookhaven</li>
             </ul>
         </aside>
 
         <main class="content">
             <div class="sort-bar">
-                <span class="result-count" id="resultCount">Buscando scripts...</span>
+                <span class="result-count" id="resultCount">0 scripts encontrados</span>
                 <div class="sort-options">
-                    <button class="sort-btn active" data-sort="newest"><i class="fas fa-clock"></i> Recentes</button>
-                    <button class="sort-btn" data-sort="downloads"><i class="fas fa-chart-line"></i> Populares</button>
+                    <button class="sort-btn active" data-sort="newest">Recentes</button>
+                    <button class="sort-btn" data-sort="downloads">Mais baixados</button>
                 </div>
             </div>
-
             <div class="script-grid" id="scriptGrid"></div>
-
             <div class="pagination" id="pagination"></div>
         </main>
     </div>
 
     <footer class="footer">
-        <p>Desenvolvido com <span>♥</span> para GitHub Pages. Layout Premium Ultra Otimizado.</p>
+        <p>© 2026 <span>ScriptBlox</span> — Hub de scripts premium. Nenhum script real é hospedado. Clone de demonstração.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. DADOS (Mock de API)
+        (function() {
+            // Dados de exemplo — simula um catálogo de scripts para jogos Roblox
             const scripts = [
-                { id:1, name:"Auto Farm & Bounty Hunter", game:"Blox Fruits", author:"xXPhoenixXx", downloads:15420, date:"2026-06-28", icon:"🍎" },
-                { id:2, name:"ESP Total, Aimbot & Hitbox", game:"Murder Mystery 2", author:"DarkNinja", downloads:13200, date:"2026-06-27", icon:"🎯" },
-                { id:3, name:"Pet Duper v3.5 (Undetected)", game:"Adopt Me!", author:"CrystalHacker", downloads:18700, date:"2026-06-29", icon:"🐾" },
-                { id:4, name:"Infinite Money & Auto Rob GUI", game:"Jailbreak", author:"RobberMaster", downloads:12100, date:"2026-06-25", icon:"💰" },
-                { id:5, name:"Auto Hatch, Farm & Trade", game:"Pet Simulator X", author:"SimFanatic", downloads:9800, date:"2026-06-30", icon:"🥚" },
-                { id:6, name:"Fly, Noclip & Troll GUI", game:"Brookhaven", author:"Glitchy", downloads:11500, date:"2026-06-26", icon:"🏠" },
-                { id:7, name:"Teleport All Islands GUI", game:"Blox Fruits", author:"PortMaster", downloads:8300, date:"2026-06-24", icon:"🌀" },
-                { id:8, name:"Auto Rob Bank & Jewelry", game:"Jailbreak", author:"MoneyHeist", downloads:7600, date:"2026-06-22", icon:"🏦" },
-                { id:9, name:"Silent Aim & Wallhack", game:"Murder Mystery 2", author:"SharpShot", downloads:6100, date:"2026-06-20", icon:"🤫" },
-                { id:10, name:"Anti-AFK, Auto Sleep & Farm", game:"Adopt Me!", author:"BabyCare", downloads:5400, date:"2026-06-19", icon:"👶" },
-                { id:11, name:"Auto Collect All Orbs & Coins", game:"Pet Simulator X", author:"OrbGoblin", downloads:4700, date:"2026-06-18", icon:"✨" },
-                { id:12, name:"Admin Commands Panel", game:"Brookhaven", author:"RoleplayKing", downloads:3900, date:"2026-06-17", icon:"🛡️" },
-                { id:13, name:"Insta Kill Bosses (Patch 1.4)", game:"Blox Fruits", author:"OneShot", downloads:3100, date:"2026-06-16", icon:"⚔️" },
-                { id:14, name:"Trade Scam Script (Visual)", game:"Adopt Me!", author:"TrustMeBro", downloads:2100, date:"2026-06-15", icon:"⚠️" },
-                { id:15, name:"Auto Arrest All Criminals", game:"Jailbreak", author:"CopBot", downloads:1800, date:"2026-06-14", icon:"🚔" }
+                { id: 1, name: "Auto Farm Blox Fruits", game: "Blox Fruits", author: "xXPhoenixXx", downloads: 15420,
+                    date: "2026-07-01", icon: "🍎" },
+                { id: 2, name: "ESP & Aimbot", game: "Murder Mystery 2", author: "DarkNinja", downloads: 13200,
+                    date: "2026-06-30", icon: "🎯" },
+                { id: 3, name: "Pet Duper v3", game: "Adopt Me!", author: "CrystalHacker", downloads: 18700,
+                    date: "2026-06-30", icon: "🐾" },
+                { id: 4, name: "Infinite Money GUI", game: "Jailbreak", author: "RobberMaster", downloads: 12100,
+                    date: "2026-06-29", icon: "💰" },
+                { id: 5, name: "Auto Hatch & Farm", game: "Pet Simulator X", author: "SimFanatic", downloads: 9800,
+                    date: "2026-07-01", icon: "🥚" },
+                { id: 6, name: "Fly & Noclip", game: "Brookhaven", author: "Glitchy", downloads: 11500,
+                date: "2026-06-28", icon: "🏠" },
+                { id: 7, name: "Teleport GUI", game: "Blox Fruits", author: "PortMaster", downloads: 8300,
+                    date: "2026-06-27", icon: "🌀" },
+                { id: 8, name: "Auto Rob Bank", game: "Jailbreak", author: "MoneyHeist", downloads: 7600,
+                    date: "2026-06-26", icon: "🏦" },
+                { id: 9, name: "Silent Aim", game: "Murder Mystery 2", author: "SharpShot", downloads: 6100,
+                    date: "2026-06-25", icon: "🤫" },
+                { id: 10, name: "Anti-AFK & Farm", game: "Adopt Me!", author: "BabyCare", downloads: 5400,
+                    date: "2026-06-24", icon: "👶" },
+                { id: 11, name: "Auto Collect Orbs", game: "Pet Simulator X", author: "OrbGoblin", downloads: 4700,
+                    date: "2026-06-23", icon: "✨" },
+                { id: 12, name: "Admin Commands", game: "Brookhaven", author: "RoleplayKing", downloads: 3900,
+                    date: "2026-06-22", icon: "🛡️" },
+                { id: 13, name: "Insta Kill", game: "Blox Fruits", author: "OneShot", downloads: 3100,
+                date: "2026-06-21", icon: "⚔️" },
+                { id: 14, name: "Scam Script", game: "Adopt Me!", author: "TrustMeBro", downloads: 2100,
+                    date: "2026-06-20", icon: "⚠️" },
+                { id: 15, name: "Auto Arrest", game: "Jailbreak", author: "CopBot", downloads: 1800,
+                date: "2026-06-19", icon: "🚔" },
+                { id: 16, name: "Fruit Sniper", game: "Blox Fruits", author: "Sn1perX", downloads: 12500,
+                    date: "2026-06-28", icon: "🎯" },
+                { id: 17, name: "Trade Scam Detector", game: "Adopt Me!", author: "SafeTrade", downloads: 9600,
+                    date: "2026-06-27", icon: "🔍" },
+                { id: 18, name: "Speed Boost", game: "Murder Mystery 2", author: "FlashStep", downloads: 4400,
+                    date: "2026-06-18", icon: "⚡" },
             ];
 
-            // 2. ESTADOS DA APLICAÇÃO
-            let state = {
-                game: 'all',
-                sort: 'newest',
-                search: '',
-                page: 1,
-                itemsPerPage: 12
-            };
+            // Estado global
+            let currentGame = 'all';
+            let currentSort = 'newest';
+            let currentSearch = '';
+            let currentPage = 1;
+            const itemsPerPage = 12;
 
-            // 3. SELETORES DOM
-            const DOM = {
-                search: document.getElementById('searchInput'),
-                gameFilter: document.getElementById('gameFilter'),
-                sortBtns: document.querySelectorAll('.sort-btn'),
-                grid: document.getElementById('scriptGrid'),
-                pagination: document.getElementById('pagination'),
-                count: document.getElementById('resultCount')
-            };
+            // Elementos do DOM
+            const searchInput = document.getElementById('searchInput');
+            const gameFilterContainer = document.getElementById('gameFilter');
+            const sortBtns = document.querySelectorAll('.sort-btn');
+            const scriptGrid = document.getElementById('scriptGrid');
+            const paginationDiv = document.getElementById('pagination');
+            const resultCountSpan = document.getElementById('resultCount');
 
-            // 4. LÓGICA DE FILTRAGEM E ORDENAÇÃO
-            const getProcessedScripts = () => {
-                let result = scripts.filter(s => {
-                    const matchGame = state.game === 'all' || s.game === state.game;
-                    const term = state.search.toLowerCase();
-                    const matchSearch = s.name.toLowerCase().includes(term) || 
-                                        s.author.toLowerCase().includes(term) || 
-                                        s.game.toLowerCase().includes(term);
+            // Função que aplica filtros e ordenação
+            function getFilteredScripts() {
+                let filtered = scripts.filter(script => {
+                    const matchGame = currentGame === 'all' || script.game === currentGame;
+                    const term = currentSearch.toLowerCase().trim();
+                    const matchSearch = term === '' ||
+                        script.name.toLowerCase().includes(term) ||
+                        script.author.toLowerCase().includes(term) ||
+                        script.game.toLowerCase().includes(term);
                     return matchGame && matchSearch;
                 });
 
-                result.sort((a, b) => {
-                    if (state.sort === 'newest') return new Date(b.date) - new Date(a.date);
-                    return b.downloads - a.downloads;
-                });
+                if (currentSort === 'newest') {
+                    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+                } else if (currentSort === 'downloads') {
+                    filtered.sort((a, b) => b.downloads - a.downloads);
+                }
+                return filtered;
+            }
 
-                return result;
-            };
+            // Verifica se o script é novo (últimos 3 dias a partir da data mais recente)
+            function isNewScript(script) {
+                const now = new Date('2026-07-01'); // data de referência simulada
+                const scriptDate = new Date(script.date);
+                const diffTime = now - scriptDate;
+                const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                return diffDays <= 3;
+            }
 
-            // 5. RENDERIZAÇÃO DA INTERFACE
-            const render = () => {
-                const data = getProcessedScripts();
-                const total = data.length;
-                const totalPages = Math.ceil(total / state.itemsPerPage) || 1;
-                
-                if (state.page > totalPages) state.page = totalPages;
-                
-                const start = (state.page - 1) * state.itemsPerPage;
-                const paginatedData = data.slice(start, start + state.itemsPerPage);
+            // Renderiza a página atual
+            function renderPage() {
+                const filtered = getFilteredScripts();
+                const totalItems = filtered.length;
+                const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+                if (currentPage > totalPages) currentPage = totalPages;
+                const start = (currentPage - 1) * itemsPerPage;
+                const pageItems = filtered.slice(start, start + itemsPerPage);
 
-                // Atualiza contador
-                DOM.count.innerHTML = `<strong>${total}</strong> script${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}`;
+                resultCountSpan.textContent =
+                    `${totalItems} script${totalItems !== 1 ? 's' : ''} encontrado${totalItems !== 1 ? 's' : ''}`;
 
-                // Renderiza Cards com delay em cascata para a animação
-                DOM.grid.innerHTML = paginatedData.map((s, index) => `
-                    <div class="script-card" style="animation-delay: ${index * 0.05}s">
+                // Constrói os cards como string HTML
+                scriptGrid.innerHTML = pageItems.map(script => {
+                    const badge = isNewScript(script) ?
+                        '<span class="badge-new">Novo</span>' : '';
+                    return `
+                    <div class="script-card glass-card">
                         <div class="card-img">
-                            <span style="transition: all 0.3s;">${s.icon}</span>
-                            <div class="get-script-btn">Ver Script</div>
+                            <span class="game-icon">${script.icon}</span>
+                            ${badge}
                         </div>
                         <div class="card-body">
-                            <span class="game-badge">${s.game}</span>
-                            <div class="script-name" title="${s.name}">${s.name}</div>
-                            <div class="author"><i class="fas fa-check-circle"></i> por ${s.author}</div>
-                            <div class="card-footer">
-                                <div class="card-stats">
-                                    <span><i class="fas fa-download"></i> ${formatNum(s.downloads)}</span>
-                                </div>
-                                <div class="card-stats">
-                                    <span><i class="far fa-calendar"></i> ${formatDate(s.date)}</span>
-                                </div>
+                            <div class="script-name" title="${script.name}">${script.name}</div>
+                            <div class="game-name">${script.game}</div>
+                            <div class="author">por ${script.author}</div>
+                            <div class="card-stats">
+                                <span><i class="fas fa-download"></i> ${formatNumber(script.downloads)}</span>
+                                <span><i class="far fa-calendar-alt"></i> ${formatDate(script.date)}</span>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    </div>`;
+                }).join('');
 
-                renderPagination(totalPages);
-            };
+                // Anima cards com stagger progressivo
+                const cards = scriptGrid.querySelectorAll('.script-card');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.04}s`;
+                    card.style.opacity = '0'; // Reinicia opacidade para animação CSS
+                    // Força reflow para reiniciar animação
+                    void card.offsetWidth;
+                    card.style.animation = 'none';
+                    void card.offsetWidth;
+                    card.style.animation =
+                        `fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards ${index * 0.04}s`;
+                });
 
-            // 6. RENDERIZAÇÃO DA PAGINAÇÃO
-            const renderPagination = (totalPages) => {
-                let html = `<button class="page-btn" ${state.page === 1 ? 'disabled' : ''} data-page="${state.page - 1}"><i class="fas fa-angle-left"></i></button>`;
-                
-                for (let i = 1; i <= totalPages; i++) {
-                    html += `<button class="page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`;
+                renderPagination(totalPages, totalItems);
+            }
+
+            function renderPagination(totalPages, totalItems) {
+                if (totalItems <= itemsPerPage && totalPages <= 1) {
+                    paginationDiv.innerHTML = '';
+                    return;
                 }
-                
-                html += `<button class="page-btn" ${state.page === totalPages ? 'disabled' : ''} data-page="${state.page + 1}"><i class="fas fa-angle-right"></i></button>`;
-                
-                DOM.pagination.innerHTML = html;
+                let html = '';
+                html +=
+                    `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>`;
 
-                // Eventos de clique na paginação
-                document.querySelectorAll('.page-btn:not([disabled])').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        state.page = parseInt(e.currentTarget.dataset.page);
-                        render();
-                        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll suave pro topo
+                const maxVisible = 5;
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+                if (endPage - startPage < maxVisible - 1) {
+                    startPage = Math.max(1, endPage - maxVisible + 1);
+                }
+
+                if (startPage > 1) {
+                    html += `<button class="page-btn" data-page="1">1</button>`;
+                    if (startPage > 2) html += `<span class="page-btn" style="border:none;background:none;cursor:default;">…</span>`;
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    html +=
+                        `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) html +=
+                        `<span class="page-btn" style="border:none;background:none;cursor:default;">…</span>`;
+                    html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+                }
+
+                html +=
+                    `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>`;
+
+                paginationDiv.innerHTML = html;
+
+                // Event listeners para botões de página
+                paginationDiv.querySelectorAll('.page-btn:not([disabled]):not([style*="cursor:default"])').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const page = parseInt(this.dataset.page);
+                        if (page >= 1 && page <= totalPages && page !== currentPage) {
+                            currentPage = page;
+                            renderPage();
+                            document.querySelector('.content').scrollIntoView({ behavior: 'smooth',
+                                block: 'start' });
+                        }
                     });
                 });
-            };
+            }
 
-            // 7. FUNÇÕES UTILITÁRIAS (Formatadores)
-            const formatNum = (num) => num >= 1000 ? (num / 1000).toFixed(1).replace('.0', '') + 'k' : num;
-            const formatDate = (dateStr) => {
-                const [y, m, d] = dateStr.split('-');
-                return `${d}/${m}`;
-            };
+            function formatNumber(num) {
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+                }
+                return num.toString();
+            }
 
-            // 8. EVENT LISTENERS (Interatividade)
-            DOM.search.addEventListener('input', (e) => {
-                state.search = e.target.value;
-                state.page = 1;
-                render();
+            function formatDate(dateStr) {
+                const date = new Date(dateStr + 'T00:00:00');
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                return `${day}/${month}`;
+            }
+
+            // Event Listeners
+            searchInput.addEventListener('input', function(e) {
+                currentSearch = e.target.value;
+                currentPage = 1;
+                renderPage();
             });
 
-            DOM.gameFilter.addEventListener('click', (e) => {
-                const li = e.target.closest('li');
-                if (!li) return;
-                document.querySelectorAll('#gameFilter li').forEach(l => l.classList.remove('active'));
-                li.classList.add('active');
-                state.game = li.dataset.game;
-                state.page = 1;
-                render();
+            gameFilterContainer.addEventListener('click', function(e) {
+                const chip = e.target.closest('.filter-chip');
+                if (!chip) return;
+                document.querySelectorAll('#gameFilter .filter-chip').forEach(c => c.classList.remove(
+                    'active'));
+                chip.classList.add('active');
+                currentGame = chip.dataset.game;
+                currentPage = 1;
+                renderPage();
             });
 
-            DOM.sortBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    DOM.sortBtns.forEach(b => b.classList.remove('active'));
-                    const target = e.currentTarget;
-                    target.classList.add('active');
-                    state.sort = target.dataset.sort;
-                    state.page = 1;
-                    render();
+            sortBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sortBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentSort = this.dataset.sort;
+                    currentPage = 1;
+                    renderPage();
                 });
             });
 
-            // Inicialização
-            render();
-        });
+            // Render inicial
+            renderPage();
+        })();
     </script>
 </body>
 </html>
