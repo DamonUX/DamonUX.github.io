@@ -25,18 +25,17 @@
             --cor-fundo-elevada: #051005;
             --cor-cartao: rgba(6, 15, 8, 0.75);
             --cor-fundo-codigo: rgba(2, 8, 3, 0.9);
-
             --cor-primaria: #00ff41;
             --cor-primaria-rgb: 0, 255, 65;
             --cor-primaria-dim: #00b82f;
             --cor-primaria-hover: #5dffa0;
             --cor-primaria-glow: rgba(0, 255, 65, 0.7);
-
             --cor-texto-principal: #d6f5dc;
             --cor-texto-secundario: #6b9a75;
             --cor-borda: rgba(0, 255, 65, 0.18);
             --cor-borda-brilho: rgba(0, 255, 65, 0.45);
-
+            --cor-admin: #ff6b35;
+            --cor-admin-rgb: 255, 107, 53;
             --fonte-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
             --borda-arredondada: 8px;
             --transicao-suave: 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -293,6 +292,331 @@
         }
 
         /* =========================================
+           BOTÃO ADMIN FLUTUANTE
+        ========================================= */
+        .admin-toggle-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--cor-admin);
+            color: var(--cor-admin);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transicao-suave);
+            box-shadow:
+                0 0 12px rgba(var(--cor-admin-rgb), 0.3),
+                0 0 30px rgba(var(--cor-admin-rgb), 0.1);
+            font-family: var(--fonte-mono);
+        }
+
+        .admin-toggle-btn:hover {
+            background: rgba(var(--cor-admin-rgb), 0.15);
+            box-shadow:
+                0 0 20px rgba(var(--cor-admin-rgb), 0.5),
+                0 0 40px rgba(var(--cor-admin-rgb), 0.2);
+            transform: scale(1.08);
+        }
+
+        /* =========================================
+           PAINEL ADMIN
+        ========================================= */
+        .admin-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0.35s;
+        }
+
+        .admin-overlay.ativo {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .admin-panel {
+            background: rgba(8, 18, 10, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--cor-admin);
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow:
+                0 0 30px rgba(var(--cor-admin-rgb), 0.3),
+                0 0 60px rgba(var(--cor-admin-rgb), 0.1),
+                0 20px 50px rgba(0, 0, 0, 0.7);
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .admin-overlay.ativo .admin-panel {
+            transform: translateY(0);
+        }
+
+        .admin-panel h2 {
+            color: var(--cor-admin);
+            text-shadow:
+                0 0 8px rgba(var(--cor-admin-rgb), 0.7),
+                0 0 20px rgba(var(--cor-admin-rgb), 0.3);
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-panel .admin-subtitle {
+            color: var(--cor-texto-secundario);
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--cor-texto-secundario);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .admin-close:hover {
+            color: var(--cor-admin);
+            text-shadow: 0 0 16px rgba(var(--cor-admin-rgb), 0.7);
+            background: rgba(var(--cor-admin-rgb), 0.08);
+        }
+
+        /* Login admin */
+        .admin-login {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .admin-login input {
+            width: 100%;
+            max-width: 300px;
+            background: rgba(3, 9, 4, 0.8);
+            border: 1px solid var(--cor-borda);
+            border-left: 3px solid var(--cor-admin);
+            color: var(--cor-texto-principal);
+            font-family: var(--fonte-mono);
+            font-size: 0.9rem;
+            padding: 12px 16px;
+            border-radius: 5px;
+            outline: none;
+            transition: all var(--transicao-suave);
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .admin-login input:focus {
+            border-color: var(--cor-admin);
+            box-shadow: 0 0 18px rgba(var(--cor-admin-rgb), 0.3);
+        }
+
+        .admin-login button {
+            background: rgba(var(--cor-admin-rgb), 0.1);
+            border: 1px solid var(--cor-admin);
+            color: var(--cor-admin);
+            font-family: var(--fonte-mono);
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all var(--transicao-suave);
+            font-size: 0.85rem;
+        }
+
+        .admin-login button:hover {
+            background: rgba(var(--cor-admin-rgb), 0.25);
+            box-shadow: 0 0 24px rgba(var(--cor-admin-rgb), 0.4);
+        }
+
+        .admin-login .erro-senha {
+            color: #ff5f56;
+            font-size: 0.8rem;
+            text-shadow: 0 0 8px rgba(255, 95, 86, 0.5);
+            min-height: 20px;
+        }
+
+        /* Conteúdo admin após login */
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.visivel {
+            display: block;
+        }
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .admin-form label {
+            color: var(--cor-texto-secundario);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: -8px;
+        }
+
+        .admin-form input,
+        .admin-form textarea {
+            width: 100%;
+            background: rgba(3, 9, 4, 0.7);
+            border: 1px solid var(--cor-borda);
+            border-left: 3px solid var(--cor-admin);
+            color: var(--cor-texto-principal);
+            font-family: var(--fonte-mono);
+            font-size: 0.85rem;
+            padding: 11px 14px;
+            border-radius: 5px;
+            outline: none;
+            transition: all var(--transicao-suave);
+            resize: vertical;
+        }
+
+        .admin-form input:focus,
+        .admin-form textarea:focus {
+            border-color: var(--cor-admin);
+            box-shadow: 0 0 14px rgba(var(--cor-admin-rgb), 0.25);
+        }
+
+        .admin-form textarea {
+            min-height: 80px;
+        }
+
+        .admin-form .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-admin {
+            background: rgba(var(--cor-admin-rgb), 0.1);
+            border: 1px solid var(--cor-admin);
+            color: var(--cor-admin);
+            font-family: var(--fonte-mono);
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all var(--transicao-suave);
+            font-size: 0.8rem;
+            flex: 1;
+            text-transform: uppercase;
+        }
+
+        .btn-admin:hover {
+            background: rgba(var(--cor-admin-rgb), 0.25);
+            box-shadow: 0 0 20px rgba(var(--cor-admin-rgb), 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-admin.excluir {
+            border-color: #ff5f56;
+            color: #ff5f56;
+            background: rgba(255, 95, 86, 0.08);
+            flex: 0.4;
+        }
+
+        .btn-admin.excluir:hover {
+            background: rgba(255, 95, 86, 0.2);
+            box-shadow: 0 0 20px rgba(255, 95, 86, 0.4);
+        }
+
+        .btn-admin.sair {
+            border-color: var(--cor-texto-secundario);
+            color: var(--cor-texto-secundario);
+            background: transparent;
+            flex: 0.4;
+            margin-top: 8px;
+        }
+
+        /* Lista de scripts no admin */
+        .admin-scripts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .admin-script-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(3, 9, 4, 0.5);
+            border: 1px solid var(--cor-borda);
+            padding: 10px 14px;
+            border-radius: 5px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-script-item span {
+            color: var(--cor-texto-principal);
+            font-size: 0.8rem;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .admin-script-item .btn-admin {
+            padding: 7px 12px;
+            font-size: 0.7rem;
+            flex: 0 0 auto;
+        }
+
+        .mensagem-admin {
+            color: var(--cor-primaria);
+            font-size: 0.8rem;
+            text-shadow: 0 0 8px rgba(var(--cor-primaria-rgb), 0.5);
+            min-height: 22px;
+            text-align: center;
+        }
+
+        /* =========================================
            CONTEÚDO PRINCIPAL
         ========================================= */
         main {
@@ -380,9 +704,6 @@
             margin: -10px 0 20px 0;
         }
 
-        /* =========================================
-           SEÇÃO DE BOAS-VINDAS
-        ========================================= */
         .welcome-box {
             background: rgba(3, 10, 5, 0.7);
             backdrop-filter: blur(6px);
@@ -427,9 +748,6 @@
             border: none;
         }
 
-        /* =========================================
-           CAMPO DE BUSCA TERMINAL
-        ========================================= */
         .search-container {
             margin-bottom: 22px;
         }
@@ -467,9 +785,6 @@
                 inset 0 0 16px rgba(var(--cor-primaria-rgb), 0.04);
         }
 
-        /* =========================================
-           LISTA DE SCRIPTS
-        ========================================= */
         .scripts-list {
             display: flex;
             flex-direction: column;
@@ -553,11 +868,10 @@
             line-height: 1.55;
         }
 
-        /* Detalhes expansíveis */
         .script-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s, opacity 0.35s;
             margin-top: 0;
             opacity: 0;
             background: rgba(0, 0, 0, 0.4);
@@ -618,9 +932,6 @@
             font-weight: 700;
         }
 
-        /* =========================================
-           BOTÕES PRINCIPAIS
-        ========================================= */
         .acoes-botoes {
             display: flex;
             gap: 12px;
@@ -671,54 +982,15 @@
             background-color: rgba(var(--cor-primaria-rgb), 0.12);
             box-shadow:
                 0 0 20px rgba(var(--cor-primaria-rgb), 0.35),
-                0 0 40px rgba(var(--cor-primaria-rgb), 0.1),
-                0 0 60px rgba(var(--cor-primaria-rgb), 0.04);
+                0 0 40px rgba(var(--cor-primaria-rgb), 0.1);
             transform: translateY(-2px);
         }
 
         .btn-obter:active,
         .btn-detalhes:active {
             transform: scale(0.96);
-            transition: transform 0.1s ease;
         }
 
-        .btn-obter:focus-visible,
-        .btn-detalhes:focus-visible {
-            outline: 2px solid var(--cor-primaria);
-            outline-offset: 3px;
-            box-shadow: 0 0 24px rgba(var(--cor-primaria-rgb), 0.5);
-        }
-
-        .btn-obter.loading,
-        .btn-detalhes.loading {
-            opacity: 0.7;
-            cursor: progress;
-            pointer-events: none;
-        }
-
-        .btn-obter:disabled,
-        .btn-detalhes:disabled {
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        .spinner {
-            width: 14px;
-            height: 14px;
-            border: 2px solid rgba(var(--cor-primaria-rgb), 0.2);
-            border-top-color: currentColor;
-            border-radius: 50%;
-            animation: girar 0.55s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes girar {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Ripple */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -735,9 +1007,6 @@
             }
         }
 
-        /* =========================================
-           MODAL
-        ========================================= */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -751,7 +1020,7 @@
             padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: opacity 0.35s, visibility 0.35s;
         }
 
         .modal-overlay.ativo {
@@ -769,11 +1038,7 @@
             width: 100%;
             padding: 28px;
             position: relative;
-            box-shadow:
-                0 0 30px rgba(var(--cor-primaria-rgb), 0.25),
-                0 0 60px rgba(var(--cor-primaria-rgb), 0.1),
-                0 0 100px rgba(var(--cor-primaria-rgb), 0.04),
-                0 20px 50px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 30px rgba(var(--cor-primaria-rgb), 0.25), 0 20px 50px rgba(0,0,0,0.7);
             transform: translateY(30px);
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -791,7 +1056,6 @@
             color: var(--cor-texto-secundario);
             font-size: 1.6rem;
             cursor: pointer;
-            transition: all 0.25s ease;
             width: 36px;
             height: 36px;
             display: flex;
@@ -803,7 +1067,6 @@
         .modal-close:hover {
             color: var(--cor-primaria);
             text-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), 0.7);
-            background: rgba(var(--cor-primaria-rgb), 0.08);
         }
 
         .modal-thumbnail {
@@ -814,7 +1077,6 @@
             border: 1px solid var(--cor-borda);
             margin-bottom: 18px;
             background: var(--cor-fundo-codigo);
-            box-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), 0.1);
         }
 
         .modal-thumbnail.placeholder {
@@ -823,11 +1085,9 @@
             justify-content: center;
             background: rgba(3, 9, 4, 0.8);
             color: var(--cor-texto-secundario);
-            font-family: var(--fonte-mono);
             font-size: 0.8rem;
             border: 1px dashed var(--cor-borda);
             text-align: center;
-            line-height: 1.6;
         }
 
         .modal-title {
@@ -842,7 +1102,6 @@
             color: var(--cor-texto-secundario);
             font-size: 0.9rem;
             margin: 0 0 22px;
-            line-height: 1.6;
         }
 
         .btn-modal-prosseguir {
@@ -864,31 +1123,18 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all var(--transicao-suave);
-            box-shadow:
-                0 0 10px rgba(var(--cor-primaria-rgb), 0.12),
-                0 0 24px rgba(var(--cor-primaria-rgb), 0.04);
         }
 
         .btn-modal-prosseguir:hover {
             background-color: rgba(var(--cor-primaria-rgb), 0.16);
-            box-shadow:
-                0 0 24px rgba(var(--cor-primaria-rgb), 0.4),
-                0 0 50px rgba(var(--cor-primaria-rgb), 0.12);
+            box-shadow: 0 0 24px rgba(var(--cor-primaria-rgb), 0.4);
             transform: translateY(-2px);
             color: #fff;
         }
 
-        .btn-modal-prosseguir:active {
-            transform: scale(0.96);
-        }
-
-        /* =========================================
-           FAQ
-        ========================================= */
         .faq-item {
             border-bottom: 1px solid var(--cor-borda);
             padding: 16px 0;
-            transition: all var(--transicao-suave);
         }
 
         .faq-item:last-child {
@@ -905,9 +1151,7 @@
             margin: 0;
             font-size: 0.95rem;
             text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.3);
-            transition: all var(--transicao-suave);
             padding: 4px 0;
-            border-radius: 4px;
             user-select: none;
         }
 
@@ -919,11 +1163,10 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), margin-top 0.5s;
             color: var(--cor-texto-secundario);
             font-size: 0.88rem;
             margin-top: 0;
-            line-height: 1.65;
         }
 
         .faq-item.ativa .faq-answer {
@@ -945,9 +1188,6 @@
             text-shadow: 0 0 10px rgba(var(--cor-primaria-rgb), 0.6);
         }
 
-        /* =========================================
-           RODAPÉ
-        ========================================= */
         footer {
             color: var(--cor-texto-secundario);
             font-size: 0.76rem;
@@ -968,9 +1208,6 @@
             text-shadow: 0 0 12px rgba(var(--cor-primaria-rgb), 0.6);
         }
 
-        /* =========================================
-           RESPONSIVIDADE
-        ========================================= */
         @media (max-width: 639px) {
             body {
                 padding: 24px 10px 50px;
@@ -1005,6 +1242,16 @@
             h1.titulo {
                 font-size: 1.8rem;
             }
+            .admin-panel {
+                padding: 20px;
+                max-height: 90vh;
+            }
+            .admin-toggle-btn {
+                bottom: 16px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
+            }
         }
 
         @media (min-width: 640px) {
@@ -1022,7 +1269,6 @@
             }
         }
 
-        /* Animação de entrada dos cards */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -1050,7 +1296,72 @@
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
     <div class="scanlines" aria-hidden="true"></div>
 
-    <!-- MODAL -->
+    <!-- BOTÃO ADMIN FLUTUANTE -->
+    <button class="admin-toggle-btn" id="admin-toggle-btn" title="Painel Admin" aria-label="Abrir painel de administração">
+        ⚙️
+    </button>
+
+    <!-- PAINEL ADMIN -->
+    <div class="admin-overlay" id="admin-overlay" aria-hidden="true">
+        <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-titulo">
+            <button class="admin-close" id="admin-close" aria-label="Fechar painel admin">&times;</button>
+            <h2 id="admin-titulo">⚙️ PAINEL ADMIN</h2>
+            <p class="admin-subtitle">Gerencie scripts, links e capas do site</p>
+
+            <!-- Tela de login -->
+            <div class="admin-login" id="admin-login">
+                <input type="password" id="admin-senha-input" placeholder="DIGITE A SENHA" autocomplete="off">
+                <button id="admin-login-btn">ENTRAR</button>
+                <p class="erro-senha" id="admin-erro-senha"></p>
+            </div>
+
+            <!-- Conteúdo pós-login -->
+            <div class="admin-content" id="admin-content">
+                <p class="mensagem-admin" id="admin-mensagem"></p>
+
+                <!-- Formulário para adicionar/editar -->
+                <div class="admin-form" id="admin-form">
+                    <input type="hidden" id="admin-edit-id" value="">
+                    <label for="admin-titulo-input">TÍTULO DO SCRIPT</label>
+                    <input type="text" id="admin-titulo-input" placeholder="Ex: Natural Disaster Hub" required>
+
+                    <label for="admin-desc-input">DESCRIÇÃO</label>
+                    <input type="text" id="admin-desc-input" placeholder="Ex: Auto win, teleport, free gamepass...">
+
+                    <label for="admin-link-input">LINK ENCURTADO</label>
+                    <input type="url" id="admin-link-input" placeholder="https://direct-link.net/..." required>
+
+                    <label for="admin-codigo-input">CÓDIGO DO SCRIPT</label>
+                    <textarea id="admin-codigo-input" placeholder="loadstring(game:HttpGet('...'))()"></textarea>
+
+                    <label for="admin-thumb-input">URL DA CAPA (opcional)</label>
+                    <input type="url" id="admin-thumb-input" placeholder="https://raw.githubusercontent.com/...">
+
+                    <label for="admin-badge-input">BADGE (opcional)</label>
+                    <input type="text" id="admin-badge-input" placeholder="POPULAR, NOVO, MOBILE...">
+
+                    <label for="admin-modal-desc-input">DESCRIÇÃO DO MODAL</label>
+                    <input type="text" id="admin-modal-desc-input" placeholder="Texto que aparece no modal ao clicar em Obter">
+
+                    <div class="btn-row">
+                        <button class="btn-admin" id="admin-salvar-btn">💾 SALVAR / ADICIONAR</button>
+                        <button class="btn-admin excluir" id="admin-excluir-btn" style="display:none;">🗑️ EXCLUIR</button>
+                    </div>
+                    <button class="btn-admin" id="admin-cancelar-btn" style="display:none;">↩️ CANCELAR EDIÇÃO</button>
+                </div>
+
+                <!-- Lista de scripts cadastrados -->
+                <h3 style="color:var(--cor-admin); margin-top:24px; font-size:1rem;">📋 SCRIPTS CADASTRADOS</h3>
+                <div class="admin-scripts-list" id="admin-scripts-list">
+                    <!-- Preenchido dinamicamente -->
+                </div>
+
+                <button class="btn-admin sair" id="admin-sair-btn">🚪 SAIR DO PAINEL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE OBTER SCRIPT -->
     <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
             <button class="modal-close" id="modal-close" aria-label="Fechar modal">&times;</button>
@@ -1083,7 +1394,6 @@
     </header>
 
     <main>
-        <!-- SEÇÃO DE BOAS-VINDAS -->
         <section class="card">
             <h2 class="section-title"><span>//</span> Bem-vindo(a) ao DamonUX</h2>
             <div class="welcome-box">
@@ -1097,7 +1407,6 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DOS SCRIPTS -->
         <section class="card">
             <h2 class="section-title"><span>//</span> Scripts Disponíveis</h2>
             <p class="section-desc">Use o campo abaixo para filtrar, toque em "Obter Script" para ver a capa e acessar o link ou expanda para ver o código.</p>
@@ -1106,11 +1415,9 @@
                 <input type="text" class="search-input" id="busca-scripts" placeholder="> filtrar scripts..." autocomplete="off" aria-label="Buscar scripts">
             </div>
 
-            <div id="scripts-list" class="scripts-list" aria-live="polite">
-            </div>
+            <div id="scripts-list" class="scripts-list" aria-live="polite"></div>
         </section>
 
-        <!-- FAQ -->
         <section class="card" id="faq">
             <h2 class="section-title"><span>//</span> Perguntas Frequentes (FAQ)</h2>
             <div class="faq-list">
@@ -1120,7 +1427,7 @@
                         <span class="faq-toggle">+</span>
                     </h3>
                     <div class="faq-answer">
-                        <p>Sim! O uso de <strong>encurtadores de link</strong> é a principal forma de manter o site <strong>vivo e gratuito</strong>. Cada acesso gera uma pequena receita que cobre custos de hospedagem e desenvolvimento. Diferente de outras plataformas cheias de anúncios invasivos que prejudicam sua experiência, nosso método é rápido, seguro e direto. Você espera alguns segundos e já está no destino. <span style="color: var(--cor-primaria); text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.5);">Sem encurtador, infelizmente o site não sobreviveria.</span></p>
+                        <p>Sim! O uso de <strong>encurtadores de link</strong> é a principal forma de manter o site <strong>vivo e gratuito</strong>. Cada acesso gera uma pequena receita que cobre custos de hospedagem e desenvolvimento. <span style="color: var(--cor-primaria);">Sem encurtador, infelizmente o site não sobreviveria.</span></p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1129,7 +1436,7 @@
                         <span class="faq-toggle">+</span>
                     </h3>
                     <div class="faq-answer">
-                        <p>Todos os scripts são verificados regularmente. Porém, use em uma conta alternativa e por sua conta e risco. Recomendamos sempre testar antes em jogos pouco importantes.</p>
+                        <p>Todos os scripts são verificados regularmente. Porém, use em uma conta alternativa e por sua conta e risco.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1138,7 +1445,7 @@
                         <span class="faq-toggle">+</span>
                     </h3>
                     <div class="faq-answer">
-                        <p>Sim! Muitos dos nossos scripts têm versões otimizadas para celular. Procure pelos com badge "MOBILE" ou descrição indicando compatibilidade. Usamos encurtadores que funcionam perfeitamente em qualquer dispositivo.</p>
+                        <p>Sim! Muitos dos nossos scripts têm versões otimizadas para celular. Procure pelos com badge "MOBILE".</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1147,7 +1454,7 @@
                         <span class="faq-toggle">+</span>
                     </h3>
                     <div class="faq-answer">
-                        <p>Fique à vontade para abrir uma issue no nosso <a href="https://github.com/DamonUX/DamonUX" style="color: var(--cor-primaria); text-shadow: 0 0 6px rgba(var(--cor-primaria-rgb), 0.5);">repositório GitHub</a>. Feedbacks são sempre bem-vindos!</p>
+                        <p>Fique à vontade para abrir uma issue no nosso <a href="https://github.com/DamonUX/DamonUX" style="color: var(--cor-primaria);">repositório GitHub</a>.</p>
                     </div>
                 </div>
             </div>
@@ -1162,9 +1469,15 @@
     <script>
         (function() {
             // =========================================
-            // BANCO DE DADOS DOS SCRIPTS
+            // SENHA DO ADMIN (ALTERE AQUI!)
             // =========================================
-            const SCRIPTS_DB = [{
+            const ADMIN_SENHA = 'damonux2024';
+
+            // =========================================
+            // BANCO DE DADOS (CARREGADO DO LOCALSTORAGE)
+            // =========================================
+            const STORAGE_KEY = 'damonux_scripts_db';
+            const SCRIPTS_DB_INICIAL = [{
                 id: 1,
                 title: "Natural diaster Hub",
                 description: "Auto win, teleport, free gamepass, black hole and more!",
@@ -1211,119 +1524,180 @@
                 modal_description: "Veja através das paredes! Destaque inimigos, aliados e itens valiosos no mapa."
             }];
 
+            function carregarScriptsDB() {
+                try {
+                    const dados = localStorage.getItem(STORAGE_KEY);
+                    if (dados) {
+                        const parsed = JSON.parse(dados);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            return parsed;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Erro ao carregar scripts do localStorage, usando padrão.');
+                }
+                // Se não houver nada salvo, salva o inicial e retorna ele
+                salvarScriptsDB(SCRIPTS_DB_INICIAL);
+                return JSON.parse(JSON.stringify(SCRIPTS_DB_INICIAL));
+            }
+
+            function salvarScriptsDB(scripts) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(scripts));
+                } catch (e) {
+                    console.warn('Erro ao salvar scripts no localStorage.');
+                }
+            }
+
+            let SCRIPTS_DB = carregarScriptsDB();
+
+            function gerarNovoId() {
+                if (SCRIPTS_DB.length === 0) return 1;
+                return Math.max(...SCRIPTS_DB.map(function(s) { return s.id; })) + 1;
+            }
+
             // =========================================
-            // PARTÍCULAS CANVAS OTIMIZADAS
+            // REFERÊNCIAS DOM GLOBAIS
+            // =========================================
+            const containerScripts = document.getElementById('scripts-list');
+            const contadorElemento = document.getElementById('contador-scripts');
+            const buscaInput = document.getElementById('busca-scripts');
+
+            // Modal
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalThumbnail = document.getElementById('modal-thumbnail');
+            const modalTitulo = document.getElementById('modal-titulo');
+            const modalDesc = document.getElementById('modal-desc');
+            const modalProsseguir = document.getElementById('modal-prosseguir');
+            const modalClose = document.getElementById('modal-close');
+
+            // Admin
+            const adminToggleBtn = document.getElementById('admin-toggle-btn');
+            const adminOverlay = document.getElementById('admin-overlay');
+            const adminClose = document.getElementById('admin-close');
+            const adminLoginDiv = document.getElementById('admin-login');
+            const adminContentDiv = document.getElementById('admin-content');
+            const adminSenhaInput = document.getElementById('admin-senha-input');
+            const adminLoginBtn = document.getElementById('admin-login-btn');
+            const adminErroSenha = document.getElementById('admin-erro-senha');
+            const adminMensagem = document.getElementById('admin-mensagem');
+            const adminEditId = document.getElementById('admin-edit-id');
+            const adminTituloInput = document.getElementById('admin-titulo-input');
+            const adminDescInput = document.getElementById('admin-desc-input');
+            const adminLinkInput = document.getElementById('admin-link-input');
+            const adminCodigoInput = document.getElementById('admin-codigo-input');
+            const adminThumbInput = document.getElementById('admin-thumb-input');
+            const adminBadgeInput = document.getElementById('admin-badge-input');
+            const adminModalDescInput = document.getElementById('admin-modal-desc-input');
+            const adminSalvarBtn = document.getElementById('admin-salvar-btn');
+            const adminExcluirBtn = document.getElementById('admin-excluir-btn');
+            const adminCancelarBtn = document.getElementById('admin-cancelar-btn');
+            const adminSairBtn = document.getElementById('admin-sair-btn');
+            const adminScriptsList = document.getElementById('admin-scripts-list');
+
+            let linkAtual = '';
+
+            // =========================================
+            // PARTÍCULAS CANVAS
             // =========================================
             const canvas = document.getElementById('particle-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let particulas = [];
-            let animacaoId = null;
-            let pausado = false;
-            const TOTAL_PARTICULAS = 45;
-            let ultimoTimestamp = 0;
-            const FRAME_ALVO = 1000 / 60; // ~16.67ms para 60fps
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particulas = [];
+                let animacaoId = null;
+                let pausado = false;
+                const TOTAL_PARTICULAS = 45;
+                let ultimoTimestamp = 0;
+                const FRAME_ALVO = 1000 / 60;
 
-            function redimensionarCanvas() {
-                const dpr = Math.min(window.devicePixelRatio || 1, 2);
-                canvas.width = window.innerWidth * dpr;
-                canvas.height = window.innerHeight * dpr;
-                canvas.style.width = window.innerWidth + 'px';
-                canvas.style.height = window.innerHeight + 'px';
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.scale(dpr, dpr);
-            }
-            window.addEventListener('resize', function() {
+                function redimensionarCanvas() {
+                    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = window.innerWidth * dpr;
+                    canvas.height = window.innerHeight * dpr;
+                    canvas.style.width = window.innerWidth + 'px';
+                    canvas.style.height = window.innerHeight + 'px';
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
+                    ctx.scale(dpr, dpr);
+                }
+                window.addEventListener('resize', function() {
+                    redimensionarCanvas();
+                    criarParticulas();
+                });
                 redimensionarCanvas();
-                criarParticulas();
-            });
-            redimensionarCanvas();
 
-            function criarParticulas() {
-                particulas = [];
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                for (let i = 0; i < TOTAL_PARTICULAS; i++) {
-                    particulas.push({
-                        x: Math.random() * w,
-                        y: Math.random() * h,
-                        vx: (Math.random() - 0.5) * 0.4,
-                        vy: (Math.random() - 0.5) * 0.4,
-                        tamanho: Math.random() * 2.4 + 0.7,
-                        brilho: Math.random() * 0.16 + 0.06,
-                        variacaoBrilho: Math.random() * 0.04,
-                        fase: Math.random() * Math.PI * 2
-                    });
-                }
-            }
-            criarParticulas();
-
-            function desenharParticulas(timestamp) {
-                if (pausado) {
-                    animacaoId = requestAnimationFrame(desenharParticulas);
-                    return;
-                }
-
-                // Controle de frame rate para 60fps estáveis
-                if (timestamp - ultimoTimestamp < FRAME_ALVO) {
-                    animacaoId = requestAnimationFrame(desenharParticulas);
-                    return;
-                }
-                ultimoTimestamp = timestamp;
-
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                ctx.clearRect(0, 0, w, h);
-
-                const tempo = timestamp * 0.001;
-
-                for (let i = 0; i < particulas.length; i++) {
-                    const p = particulas[i];
-                    p.x += p.vx;
-                    p.y += p.vy;
-
-                    if (p.x < -15) p.x = w + 15;
-                    if (p.x > w + 15) p.x = -15;
-                    if (p.y < -15) p.y = h + 15;
-                    if (p.y > h + 15) p.y = -15;
-
-                    // Variação de brilho pulsante
-                    const brilhoAtual = p.brilho + Math.sin(tempo * 2.5 + p.fase) * p.variacaoBrilho;
-                    const alpha = Math.max(0.04, Math.min(0.25, brilhoAtual));
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.tamanho, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 255, 65, ' + alpha + ')';
-                    ctx.fill();
-
-                    // Brilho extra nas partículas maiores (fagulhas)
-                    if (p.tamanho > 1.8 && alpha > 0.12) {
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.tamanho * 1.8, 0, Math.PI * 2);
-                        ctx.fillStyle = 'rgba(0, 255, 65, ' + (alpha * 0.25) + ')';
-                        ctx.fill();
+                function criarParticulas() {
+                    particulas = [];
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+                    for (let i = 0; i < TOTAL_PARTICULAS; i++) {
+                        particulas.push({
+                            x: Math.random() * w,
+                            y: Math.random() * h,
+                            vx: (Math.random() - 0.5) * 0.4,
+                            vy: (Math.random() - 0.5) * 0.4,
+                            tamanho: Math.random() * 2.4 + 0.7,
+                            brilho: Math.random() * 0.16 + 0.06,
+                            variacaoBrilho: Math.random() * 0.04,
+                            fase: Math.random() * Math.PI * 2
+                        });
                     }
                 }
+                criarParticulas();
 
-                animacaoId = requestAnimationFrame(desenharParticulas);
-            }
-
-            const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-            if (!motionQuery.matches) {
-                animacaoId = requestAnimationFrame(desenharParticulas);
-            } else {
-                pausado = true;
-            }
-            motionQuery.addEventListener('change', function(e) {
-                pausado = e.matches;
-                if (pausado && animacaoId) {
-                    cancelAnimationFrame(animacaoId);
-                    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-                } else if (!pausado) {
-                    ultimoTimestamp = performance.now();
+                function desenharParticulas(timestamp) {
+                    if (pausado) {
+                        animacaoId = requestAnimationFrame(desenharParticulas);
+                        return;
+                    }
+                    if (timestamp - ultimoTimestamp < FRAME_ALVO) {
+                        animacaoId = requestAnimationFrame(desenharParticulas);
+                        return;
+                    }
+                    ultimoTimestamp = timestamp;
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+                    ctx.clearRect(0, 0, w, h);
+                    const tempo = timestamp * 0.001;
+                    for (let i = 0; i < particulas.length; i++) {
+                        const p = particulas[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        if (p.x < -15) p.x = w + 15;
+                        if (p.x > w + 15) p.x = -15;
+                        if (p.y < -15) p.y = h + 15;
+                        if (p.y > h + 15) p.y = -15;
+                        const brilhoAtual = p.brilho + Math.sin(tempo * 2.5 + p.fase) * p.variacaoBrilho;
+                        const alpha = Math.max(0.04, Math.min(0.25, brilhoAtual));
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.tamanho, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(0, 255, 65, ' + alpha + ')';
+                        ctx.fill();
+                        if (p.tamanho > 1.8 && alpha > 0.12) {
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.tamanho * 1.8, 0, Math.PI * 2);
+                            ctx.fillStyle = 'rgba(0, 255, 65, ' + (alpha * 0.25) + ')';
+                            ctx.fill();
+                        }
+                    }
                     animacaoId = requestAnimationFrame(desenharParticulas);
                 }
-            });
+                const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+                if (!motionQuery.matches) {
+                    animacaoId = requestAnimationFrame(desenharParticulas);
+                } else {
+                    pausado = true;
+                }
+                motionQuery.addEventListener('change', function(e) {
+                    pausado = e.matches;
+                    if (pausado && animacaoId) {
+                        cancelAnimationFrame(animacaoId);
+                        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    } else if (!pausado) {
+                        ultimoTimestamp = performance.now();
+                        animacaoId = requestAnimationFrame(desenharParticulas);
+                    }
+                });
+            }
 
             // =========================================
             // FUNÇÕES UTILITÁRIAS
@@ -1348,21 +1722,18 @@
                 });
             }
 
-            // =========================================
-            // MODAL
-            // =========================================
-            const modalOverlay = document.getElementById('modal-overlay');
-            const modalThumbnail = document.getElementById('modal-thumbnail');
-            const modalTitulo = document.getElementById('modal-titulo');
-            const modalDesc = document.getElementById('modal-desc');
-            const modalProsseguir = document.getElementById('modal-prosseguir');
-            const modalClose = document.getElementById('modal-close');
-            let linkAtual = '';
-
-            if (!modalOverlay || !modalThumbnail || !modalTitulo || !modalDesc || !modalProsseguir || !modalClose) {
-                console.warn('Elementos do modal não encontrados no DOM.');
+            function mostrarMensagemAdmin(msg, cor) {
+                if (!adminMensagem) return;
+                adminMensagem.textContent = msg;
+                adminMensagem.style.color = cor || 'var(--cor-primaria)';
+                setTimeout(function() {
+                    if (adminMensagem) adminMensagem.textContent = '';
+                }, 3000);
             }
 
+            // =========================================
+            // MODAL DE OBTER SCRIPT
+            // =========================================
             function abrirModal(script) {
                 if (!modalOverlay) return;
                 linkAtual = script.link_encurtado;
@@ -1412,20 +1783,18 @@
                 if (modalThumbnail) modalThumbnail.style.display = 'block';
             }
 
-            if (modalClose) {
-                modalClose.addEventListener('click', fecharModal);
-            }
+            if (modalClose) modalClose.addEventListener('click', fecharModal);
             if (modalOverlay) {
                 modalOverlay.addEventListener('click', function(e) {
                     if (e.target === modalOverlay) fecharModal();
                 });
             }
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('ativo')) {
-                    fecharModal();
+                if (e.key === 'Escape') {
+                    if (modalOverlay && modalOverlay.classList.contains('ativo')) fecharModal();
+                    if (adminOverlay && adminOverlay.classList.contains('ativo')) fecharAdmin();
                 }
             });
-
             if (modalProsseguir) {
                 modalProsseguir.addEventListener('click', function() {
                     if (linkAtual) {
@@ -1438,58 +1807,46 @@
             // =========================================
             // RENDERIZAÇÃO DA LISTA DE SCRIPTS
             // =========================================
-            const containerScripts = document.getElementById('scripts-list');
-            const contadorElemento = document.getElementById('contador-scripts');
-
             function renderizarScripts() {
                 if (!containerScripts) return;
-                containerScripts.innerHTML = SCRIPTS_DB.map(script => `
-                    <article class="script-item" data-id="${script.id}" data-titulo="${escaparHTML(script.title).toLowerCase()}" data-descricao="${escaparHTML(script.description).toLowerCase()}">
-                        <div class="script-item-header">
-                            <h3 class="script-item-title">&gt; ${escaparHTML(script.title)}</h3>
-                            ${script.badge ? '<span class="badge">' + escaparHTML(script.badge) + '</span>' : ''}
-                        </div>
-                        <p class="script-item-desc">${escaparHTML(script.description)}</p>
-                        <div class="acoes-botoes">
-                            <button class="btn-obter" data-id="${script.id}" aria-label="Obter ${escaparHTML(script.title)}">
-                                <span class="btn-texto">OBTER SCRIPT</span>
-                            </button>
-                            <button class="btn-detalhes" aria-label="Ver detalhes de ${escaparHTML(script.title)}" aria-expanded="false">
-                                [+]
-                            </button>
-                        </div>
-                        <div class="script-details">
-                            <pre><code>${escaparHTML(script.codigo)}</code></pre>
-                            <button class="btn-copiar-codigo" data-codigo="${escaparHTML(script.codigo)}" aria-label="Copiar código">
-                                📋 COPIAR CÓDIGO
-                            </button>
-                        </div>
-                    </article>
-                `).join('');
+                containerScripts.innerHTML = SCRIPTS_DB.map(function(script) {
+                    return '<article class="script-item" data-id="' + script.id + '" data-titulo="' + escaparHTML(script
+                        .title).toLowerCase() + '" data-descricao="' + escaparHTML(script.description).toLowerCase() +
+                        '">' +
+                        '<div class="script-item-header">' +
+                        '<h3 class="script-item-title">&gt; ' + escaparHTML(script.title) + '</h3>' +
+                        (script.badge ? '<span class="badge">' + escaparHTML(script.badge) + '</span>' : '') +
+                        '</div>' +
+                        '<p class="script-item-desc">' + escaparHTML(script.description) + '</p>' +
+                        '<div class="acoes-botoes">' +
+                        '<button class="btn-obter" data-id="' + script.id + '" aria-label="Obter ' + escaparHTML(script
+                            .title) + '">' +
+                        '<span class="btn-texto">OBTER SCRIPT</span></button>' +
+                        '<button class="btn-detalhes" aria-label="Ver detalhes" aria-expanded="false">[+]</button>' +
+                        '</div>' +
+                        '<div class="script-details"><pre><code>' + escaparHTML(script.codigo) + '</code></pre>' +
+                        '<button class="btn-copiar-codigo" data-codigo="' + escaparHTML(script.codigo) +
+                        '" aria-label="Copiar código">📋 COPIAR CÓDIGO</button></div>' +
+                        '</article>';
+                }).join('');
 
                 if (contadorElemento) {
                     contadorElemento.textContent = SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
                 }
-
                 vincularEventosScripts();
             }
 
             function vincularEventosScripts() {
                 if (!containerScripts) return;
-
-                containerScripts.querySelectorAll('.btn-obter').forEach(botao => {
+                containerScripts.querySelectorAll('.btn-obter').forEach(function(botao) {
                     botao.addEventListener('click', function(e) {
-                        if (this.classList.contains('loading')) return;
                         criarRipple(e, this);
                         const id = parseInt(this.getAttribute('data-id'));
                         const script = SCRIPTS_DB.find(function(s) { return s.id === id; });
-                        if (script) {
-                            abrirModal(script);
-                        }
+                        if (script) abrirModal(script);
                     });
                 });
-
-                containerScripts.querySelectorAll('.btn-detalhes').forEach(botao => {
+                containerScripts.querySelectorAll('.btn-detalhes').forEach(function(botao) {
                     botao.addEventListener('click', function(e) {
                         criarRipple(e, this);
                         const item = this.closest('.script-item');
@@ -1499,8 +1856,7 @@
                         this.textContent = expandido ? '[-]' : '[+]';
                     });
                 });
-
-                containerScripts.querySelectorAll('.btn-copiar-codigo').forEach(botao => {
+                containerScripts.querySelectorAll('.btn-copiar-codigo').forEach(function(botao) {
                     botao.addEventListener('click', function(e) {
                         criarRipple(e, this);
                         const codigo = this.getAttribute('data-codigo');
@@ -1535,33 +1891,211 @@
             // =========================================
             // FILTRO DE BUSCA
             // =========================================
-            const buscaInput = document.getElementById('busca-scripts');
             if (buscaInput) {
                 buscaInput.addEventListener('input', function() {
                     const termo = this.value.trim().toLowerCase();
                     const itens = document.querySelectorAll('.script-item');
                     let visiveis = 0;
-
                     itens.forEach(function(item) {
                         const titulo = item.getAttribute('data-titulo') || '';
                         const descricao = item.getAttribute('data-descricao') || '';
-                        const corresponde = titulo.includes(termo) || descricao.includes(termo);
-
-                        if (corresponde) {
+                        if (titulo.includes(termo) || descricao.includes(termo)) {
                             item.classList.remove('oculto');
                             visiveis++;
                         } else {
                             item.classList.add('oculto');
                         }
                     });
-
                     if (contadorElemento) {
-                        contadorElemento.textContent = termo ?
-                            visiveis + ' DE ' + SCRIPTS_DB.length + ' SCRIPTS' :
+                        contadorElemento.textContent = termo ? visiveis + ' DE ' + SCRIPTS_DB.length + ' SCRIPTS' :
                             SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
                     }
                 });
             }
+
+            // =========================================
+            // PAINEL ADMIN
+            // =========================================
+            function abrirAdmin() {
+                if (!adminOverlay) return;
+                adminOverlay.classList.add('ativo');
+                adminOverlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                // Reseta para tela de login
+                adminLoginDiv.style.display = 'flex';
+                adminContentDiv.classList.remove('visivel');
+                adminSenhaInput.value = '';
+                adminErroSenha.textContent = '';
+                limparFormAdmin();
+                setTimeout(function() {
+                    if (adminSenhaInput) adminSenhaInput.focus();
+                }, 400);
+            }
+
+            function fecharAdmin() {
+                if (!adminOverlay) return;
+                adminOverlay.classList.remove('ativo');
+                adminOverlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            function loginAdmin() {
+                const senha = adminSenhaInput.value.trim();
+                if (senha === ADMIN_SENHA) {
+                    adminLoginDiv.style.display = 'none';
+                    adminContentDiv.classList.add('visivel');
+                    adminErroSenha.textContent = '';
+                    adminSenhaInput.value = '';
+                    renderizarAdminScriptsList();
+                    limparFormAdmin();
+                } else {
+                    adminErroSenha.textContent = '⚠️ SENHA INCORRETA!';
+                    adminSenhaInput.value = '';
+                    adminSenhaInput.focus();
+                }
+            }
+
+            function renderizarAdminScriptsList() {
+                if (!adminScriptsList) return;
+                if (SCRIPTS_DB.length === 0) {
+                    adminScriptsList.innerHTML =
+                        '<p style="color:var(--cor-texto-secundario); text-align:center; padding:20px;">Nenhum script cadastrado ainda.</p>';
+                    return;
+                }
+                adminScriptsList.innerHTML = SCRIPTS_DB.map(function(script) {
+                    return '<div class="admin-script-item">' +
+                        '<span>' + escaparHTML(script.title) + (script.badge ? ' <small style="color:var(--cor-admin);">[' +
+                            escaparHTML(script.badge) + ']</small>' : '') + '</span>' +
+                        '<button class="btn-admin editar-admin" data-id="' + script.id +
+                        '" style="flex:0.5; padding:7px 10px; font-size:0.7rem;">✏️ EDITAR</button>' +
+                        '</div>';
+                }).join('');
+
+                adminScriptsList.querySelectorAll('.editar-admin').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.getAttribute('data-id'));
+                        carregarScriptParaEdicao(id);
+                    });
+                });
+            }
+
+            function carregarScriptParaEdicao(id) {
+                const script = SCRIPTS_DB.find(function(s) { return s.id === id; });
+                if (!script) return;
+                adminEditId.value = script.id;
+                adminTituloInput.value = script.title;
+                adminDescInput.value = script.description;
+                adminLinkInput.value = script.link_encurtado;
+                adminCodigoInput.value = script.codigo;
+                adminThumbInput.value = script.thumbnail || '';
+                adminBadgeInput.value = script.badge || '';
+                adminModalDescInput.value = script.modal_description || '';
+                adminExcluirBtn.style.display = 'inline-flex';
+                adminCancelarBtn.style.display = 'inline-flex';
+                adminSalvarBtn.textContent = '💾 ATUALIZAR SCRIPT';
+                adminTituloInput.focus();
+                adminOverlay.querySelector('.admin-panel').scrollTop = 0;
+            }
+
+            function limparFormAdmin() {
+                adminEditId.value = '';
+                adminTituloInput.value = '';
+                adminDescInput.value = '';
+                adminLinkInput.value = '';
+                adminCodigoInput.value = '';
+                adminThumbInput.value = '';
+                adminBadgeInput.value = '';
+                adminModalDescInput.value = '';
+                adminExcluirBtn.style.display = 'none';
+                adminCancelarBtn.style.display = 'none';
+                adminSalvarBtn.textContent = '💾 SALVAR / ADICIONAR';
+            }
+
+            function salvarScriptAdmin() {
+                const titulo = adminTituloInput.value.trim();
+                const link = adminLinkInput.value.trim();
+                if (!titulo || !link) {
+                    mostrarMensagemAdmin('⚠️ Título e Link são obrigatórios!', '#ff5f56');
+                    return;
+                }
+                const editId = adminEditId.value;
+                if (editId) {
+                    // Editando existente
+                    const index = SCRIPTS_DB.findIndex(function(s) { return s.id === parseInt(editId); });
+                    if (index !== -1) {
+                        SCRIPTS_DB[index].title = titulo;
+                        SCRIPTS_DB[index].description = adminDescInput.value.trim();
+                        SCRIPTS_DB[index].link_encurtado = link;
+                        SCRIPTS_DB[index].codigo = adminCodigoInput.value.trim();
+                        SCRIPTS_DB[index].thumbnail = adminThumbInput.value.trim();
+                        SCRIPTS_DB[index].badge = adminBadgeInput.value.trim() || null;
+                        SCRIPTS_DB[index].modal_description = adminModalDescInput.value.trim();
+                        mostrarMensagemAdmin('✅ Script atualizado com sucesso!');
+                    }
+                } else {
+                    // Adicionando novo
+                    const novoScript = {
+                        id: gerarNovoId(),
+                        title: titulo,
+                        description: adminDescInput.value.trim(),
+                        link_encurtado: link,
+                        codigo: adminCodigoInput.value.trim(),
+                        thumbnail: adminThumbInput.value.trim(),
+                        badge: adminBadgeInput.value.trim() || null,
+                        modal_description: adminModalDescInput.value.trim()
+                    };
+                    SCRIPTS_DB.push(novoScript);
+                    mostrarMensagemAdmin('✅ Novo script adicionado!');
+                }
+                salvarScriptsDB(SCRIPTS_DB);
+                limparFormAdmin();
+                renderizarScripts();
+                renderizarAdminScriptsList();
+                if (contadorElemento) contadorElemento.textContent = SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
+            }
+
+            function excluirScriptAdmin() {
+                const editId = adminEditId.value;
+                if (!editId) return;
+                if (!confirm('Tem certeza que deseja EXCLUIR este script? Esta ação não pode ser desfeita.')) return;
+                SCRIPTS_DB = SCRIPTS_DB.filter(function(s) { return s.id !== parseInt(editId); });
+                salvarScriptsDB(SCRIPTS_DB);
+                limparFormAdmin();
+                renderizarScripts();
+                renderizarAdminScriptsList();
+                if (contadorElemento) contadorElemento.textContent = SCRIPTS_DB.length + ' SCRIPTS DISPONÍVEIS';
+                mostrarMensagemAdmin('🗑️ Script excluído.', '#ff5f56');
+            }
+
+            function sairAdmin() {
+                adminLoginDiv.style.display = 'flex';
+                adminContentDiv.classList.remove('visivel');
+                adminSenhaInput.value = '';
+                adminErroSenha.textContent = '';
+                limparFormAdmin();
+            }
+
+            // Eventos admin
+            if (adminToggleBtn) adminToggleBtn.addEventListener('click', abrirAdmin);
+            if (adminClose) adminClose.addEventListener('click', fecharAdmin);
+            if (adminOverlay) {
+                adminOverlay.addEventListener('click', function(e) {
+                    if (e.target === adminOverlay) fecharAdmin();
+                });
+            }
+            if (adminLoginBtn) adminLoginBtn.addEventListener('click', loginAdmin);
+            if (adminSenhaInput) {
+                adminSenhaInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') loginAdmin();
+                });
+            }
+            if (adminSalvarBtn) adminSalvarBtn.addEventListener('click', salvarScriptAdmin);
+            if (adminExcluirBtn) adminExcluirBtn.addEventListener('click', excluirScriptAdmin);
+            if (adminCancelarBtn) adminCancelarBtn.addEventListener('click', function() {
+                limparFormAdmin();
+                mostrarMensagemAdmin('Edição cancelada.', 'var(--cor-texto-secundario)');
+            });
+            if (adminSairBtn) adminSairBtn.addEventListener('click', sairAdmin);
 
             // =========================================
             // EFEITO DE DIGITAÇÃO NO TÍTULO
@@ -1656,7 +2190,6 @@
                 const usuarios = Math.floor(Math.random() * 121) + 60;
                 usuariosElemento.textContent = usuarios + ' ONLINE';
             }
-
             atualizarUptime();
             atualizarUsuarios();
             setInterval(atualizarUptime, 60000);
@@ -1666,9 +2199,7 @@
             // ANO NO RODAPÉ
             // =========================================
             const anoElemento = document.getElementById('ano-atual');
-            if (anoElemento) {
-                anoElemento.textContent = new Date().getFullYear();
-            }
+            if (anoElemento) anoElemento.textContent = new Date().getFullYear();
 
             // =========================================
             // FAQ INTERATIVA
@@ -1686,8 +2217,6 @@
                     if (!estavaAtiva) {
                         item.classList.add('ativa');
                         this.setAttribute('aria-expanded', 'true');
-                    } else {
-                        this.setAttribute('aria-expanded', 'false');
                     }
                 });
                 pergunta.addEventListener('keydown', function(e) {
@@ -1702,7 +2231,6 @@
             // INICIALIZAÇÃO
             // =========================================
             renderizarScripts();
-
         })();
     </script>
 </body>
