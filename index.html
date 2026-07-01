@@ -695,10 +695,10 @@
             <h2 class="section-title"><span>//</span> Tutorial em Vídeo</h2>
             <div class="video-container">
                 <!-- SUBSTITUA O ID ABAIXO PELO ID DO SEU VÍDEO DO YOUTUBE -->
-                <iframe src="https://www.youtube.com/embed/D0cRl8HdsjY" title="Tutorial em vídeo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tutorial em vídeo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy">
                 </iframe>
             </div>
-            <p class="video-caption">Bem-vindo ao melhor e mais moderno site de scripts para Roblox, obrigado pelo apoio.</p>
+            <p class="video-caption">Assista ao passo a passo de como ativar e usar o script corretamente para não ter erros.</p>
         </section>
 
         <!-- SEÇÃO DOS SCRIPTS -->
@@ -791,7 +791,8 @@
             // =========================================
             // BANCO DE DADOS DOS SCRIPTS
             // =========================================
-            Id: 1,
+            const SCRIPTS_DB = [{
+                    id: 1,
                     title: "Script Universal v3.2",
                     description: "Compatível com a maioria dos jogos populares. Atualizado semanalmente.",
                     badge: "POPULAR",
@@ -831,6 +832,30 @@
                     codigo: 'loadstring(game:HttpGet("https://pastebin.com/raw/Exemplo5"))()'
                 }
             ];
+
+            // =========================================
+            // FUNÇÕES UTILITÁRIAS
+            // =========================================
+            function escaparHTML(texto) {
+                const div = document.createElement('div');
+                div.textContent = texto;
+                return div.innerHTML;
+            }
+
+            function criarRipple(evento, botao) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = botao.getBoundingClientRect();
+                const tamanho = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = tamanho + 'px';
+                ripple.style.left = (evento.clientX - rect.left - tamanho / 2) + 'px';
+                ripple.style.top = (evento.clientY - rect.top - tamanho / 2) + 'px';
+                botao.appendChild(ripple);
+                ripple.addEventListener('animationend', function() {
+                    ripple.remove();
+                });
+            }
+
             // =========================================
             // RENDERIZAÇÃO DA LISTA DE SCRIPTS
             // =========================================
